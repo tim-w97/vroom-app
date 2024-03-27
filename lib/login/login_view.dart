@@ -18,14 +18,16 @@ class TestWidget extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: const LoginView(),
+      home: LoginView(),
     );
   }
 }
 //
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  LoginView({super.key});
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +42,25 @@ class LoginView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Decode"),
-              TextField(),
-              TextField(),
+              Consumer<LoginVM>(builder: (context, vm, child) {
+                return Text(vm.decodedString);
+              }),
+              TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Username'),
+              ),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Password'),
+              ),
               ElevatedButton(
                   onPressed: () => {
-                    LoginVM().decodeBase64("Bob", "Password1")
-                  },
+                        context.read<LoginVM>().decodeBase64(
+                            usernameController.text, passwordController.text)
+                      },
                   child: const Text("Login"))
             ],
           ),
