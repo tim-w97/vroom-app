@@ -13,7 +13,6 @@ class LoginVM extends ChangeNotifier {
   void decodeBase64(String username,String password) {
     Codec<String,String> authBase64 = utf8.fuse(base64);
     _decodedString = authBase64.encode('$username:$password');
-    print(_decodedString);
     notifyListeners();
   }
 

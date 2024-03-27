@@ -39,31 +39,31 @@ class LoginView extends StatelessWidget {
           title: const Text("Login Test Widget"),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Consumer<LoginVM>(builder: (context, vm, child) {
-                return Text(vm.decodedString);
-              }),
-              TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Username'),
-              ),
-              TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Password'),
-              ),
-              ElevatedButton(
-                  onPressed: () => {
-                        context.read<LoginVM>().decodeBase64(
-                            usernameController.text, passwordController.text)
-                      },
-                  child: const Text("Login"))
-            ],
-          ),
+          child: Consumer<LoginVM>(builder: (context, vm, child) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(vm.decodedString),
+                TextField(
+                  controller: usernameController,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Username'),
+                ),
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Password'),
+                ),
+                ElevatedButton(
+                    onPressed: () => {
+                          vm.decodeBase64(
+                              usernameController.text, passwordController.text)
+                        },
+                    child: const Text("Login"))
+              ],
+            );
+          }),
         ),
       ),
     );
