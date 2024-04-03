@@ -3,13 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vroom_campus_app/keys.dart';
 
 class LoginVM extends ChangeNotifier {
-  late final SharedPreferences sharedPreferences;
+  late final SharedPreferences _sharedPreferences;
   String _decodedString = "";
+
+  LoginVM() {
+    _initSharedPreferences();
+  }
 
   String get decodedString {
     return _decodedString;
+  }
+
+  Future<void> _initSharedPreferences() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
   }
 
   void decodeBase64(String username,String password) {
@@ -20,9 +29,8 @@ class LoginVM extends ChangeNotifier {
   }
 
   Future<void> save() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString("Base64Auth", _decodedString);
-    print(sharedPreferences.get("Base64Auth"));
+    _sharedPreferences.setString(SharedPreferencesKeys.base64Authentication.toString(), _decodedString);
+    print(_sharedPreferences.get(SharedPreferencesKeys.base64Authentication.toString()));
     notifyListeners();
   }
 
