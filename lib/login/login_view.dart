@@ -44,16 +44,16 @@ class LoginView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(vm.decodedString),
-                Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(10)),
                 SizedBox(
                   width: 300,
                   child: TextField(
                     controller: usernameController,
                     decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Username'),
+                        border: OutlineInputBorder(), labelText: 'Username/E-mail'),
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(10)),
                 SizedBox(
                   width: 300,
                   child: TextField(
@@ -63,7 +63,7 @@ class LoginView extends StatelessWidget {
                         border: OutlineInputBorder(), labelText: 'Password'),
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(10)),
+                const Padding(padding: EdgeInsets.all(10)),
                 ElevatedButton(
                     onPressed: () => {
                           vm.decodeBase64(
