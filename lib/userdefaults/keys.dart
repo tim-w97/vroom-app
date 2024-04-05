@@ -3,5 +3,5 @@
 
 enum SharedPreferencesKeys {
   base64Authentication, //Key for email/username & password pair decoded in base 64
-  //TODO Key for login info
+  saveUserLoginBool, //Stores the information if the user has
 }
