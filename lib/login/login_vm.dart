@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vroom_campus_app/keys.dart';
+import 'package:vroom_campus_app/userdefaults/keys.dart';
 
 class LoginVM extends ChangeNotifier {
   late final SharedPreferences _sharedPreferences;
   String _decodedString = "";
+  //bool  _saveLoginInfo; //TODO
 
   LoginVM() {
     _initSharedPreferences();
