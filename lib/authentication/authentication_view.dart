@@ -22,11 +22,12 @@ class TestWidget extends StatelessWidget {
     );
   }
 }
-//
 
+// TODO Maybe this shouldn't be a separate view?
 class AuthenticationView extends StatelessWidget {
   AuthenticationView({super.key});
-  final usernameController = TextEditingController();
+
+  final usernameController = TextEditingController();   //TODO Move these two controller inside the LoginWidget?
   final passwordController = TextEditingController();
 
   @override
