@@ -32,7 +32,8 @@ class LoginWidget extends StatelessWidget {
                   child: TextField(
                     controller: usernameController,
                     decoration: const InputDecoration(
-                        border: OutlineInputBorder(), labelText: 'Username/E-mail'),
+                        border: OutlineInputBorder(),
+                        labelText: 'Username/E-mail'),
                   ),
                 ),
                 const Padding(padding: EdgeInsets.all(10)),
@@ -48,9 +49,9 @@ class LoginWidget extends StatelessWidget {
                 const Padding(padding: EdgeInsets.all(10)),
                 ElevatedButton(
                     onPressed: () => {
-                      vm.decodeBase64(
-                          usernameController.text, passwordController.text)
-                    },
+                          vm.decodeBase64(
+                              usernameController.text, passwordController.text)
+                        },
                     child: const Text("Login"))
               ],
             );

@@ -3,7 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/authentication/register/register_vm.dart';
 
 class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+  RegisterView({super.key});
+
+  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final repeatPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

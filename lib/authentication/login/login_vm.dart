@@ -29,5 +29,9 @@ class LoginVM extends ChangeNotifier {
     _sharedPreferences.setString(SharedPreferencesKeys.base64Authentication.toString(), _decodedString);
     notifyListeners();
   }
-
+  @override
+  void dispose() {
+    //TODO Cleanup TextEditingController
+   super.dispose();
+  }
 }
