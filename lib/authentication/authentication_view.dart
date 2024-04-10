@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vroom_campus_app/authentication/register/register_view.dart';
 
 import 'login/login_view.dart';
 
