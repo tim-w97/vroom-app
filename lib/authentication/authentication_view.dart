@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vroom_campus_app/userdefaults/shared_preferences_helper.dart';
 
-import 'login_widget.dart';
+import 'login/login_view.dart';
 
 //Run this for testing the widget we kick this out later ;)
 void main() {
