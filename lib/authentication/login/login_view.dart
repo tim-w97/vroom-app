@@ -4,12 +4,8 @@ import 'package:provider/provider.dart';
 import 'login_vm.dart';
 
 class LoginWidget extends StatelessWidget {
-  LoginWidget({
-    super.key,
-  });
+  const LoginWidget({super.key});
 
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +26,9 @@ class LoginWidget extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextField(
-                    controller: usernameController,
+                    onChanged: (value) {
+                      vm.setUsername(value);
+                    },
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Username/E-mail'),
@@ -40,7 +38,9 @@ class LoginWidget extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: TextField(
-                    controller: passwordController,
+                    onChanged: (value) {
+                      vm.setPassword(value);
+                    },
                     obscureText: true,
                     decoration: const InputDecoration(
                         border: OutlineInputBorder(), labelText: 'Password'),
@@ -48,9 +48,8 @@ class LoginWidget extends StatelessWidget {
                 ),
                 const Padding(padding: EdgeInsets.all(10)),
                 ElevatedButton(
-                    onPressed: () => {
-                          vm.decodeBase64(
-                              usernameController.text, passwordController.text)
+                    onPressed: ()  {
+                          vm.decodeBase64();
                         },
                     child: const Text("Login"))
               ],
