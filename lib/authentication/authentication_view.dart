@@ -19,20 +19,18 @@ class TestWidget extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: AuthenticationView(),
+      home: const AuthenticationView(),
     );
   }
 }
 
 // TODO Maybe this shouldn't be a separate view?
 class AuthenticationView extends StatelessWidget {
-  AuthenticationView({super.key});
+  const AuthenticationView({super.key});
 
-  final usernameController = TextEditingController();   //TODO Move these two controller inside the LoginWidget?
-  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return LoginWidget(usernameController: usernameController, passwordController: passwordController);
+    return LoginWidget();
   }
 }

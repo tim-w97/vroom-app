@@ -4,14 +4,12 @@ import 'package:provider/provider.dart';
 import 'login_vm.dart';
 
 class LoginWidget extends StatelessWidget {
-  const LoginWidget({
+  LoginWidget({
     super.key,
-    required this.usernameController,
-    required this.passwordController,
   });
 
-  final TextEditingController usernameController;
-  final TextEditingController passwordController;
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
