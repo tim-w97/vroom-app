@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vroom_campus_app/userdefaults/shared_preferences_helper.dart';
 
-void main() async {
-  //TODO await SharedPreferencesHelper.init();
+void main() {
   runApp(const MyApp());
 }
 

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vroom_campus_app/userdefaults/shared_preferences_helper.dart';
 
 import 'login_widget.dart';
 
 //Run this for testing the widget we kick this out later ;)
-void main() /*async*/ {
-  //TODO
-  //await SharedPreferencesHelper.init();
+void main() {
   runApp(const TestWidget());
 }
 

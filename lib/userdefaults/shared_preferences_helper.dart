@@ -26,7 +26,6 @@ class SharedPreferencesHelper {
   }
 
   //Base64String
-
   static void setBase64Authentication(String base64String) async {
      _sharedPreferences!.setString(
          SharedPreferencesKeys.base64Authentication.toString(), base64String
