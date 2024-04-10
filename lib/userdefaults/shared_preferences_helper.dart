@@ -3,22 +3,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vroom_campus_app/userdefaults/keys.dart';
 
 class SharedPreferencesHelper {
-  static SharedPreferences? sharedPreferences;
+  static SharedPreferences? _sharedPreferences;
 
-  //TODO Init at the start of the app
-   static Future<void> init() async {
-    sharedPreferences = await SharedPreferences.getInstance();
+  static Future<SharedPreferences> getInstance() async {
+     if(_sharedPreferences == null) {
+       return SharedPreferences.getInstance();
+     }
+     return _sharedPreferences!;
   }
 
   //User login
   static void setSaveUserLoginData(bool state) async {
-     sharedPreferences!.setBool(
+     _sharedPreferences!.setBool(
          SharedPreferencesKeys.saveUserLoginBool.toString(), state
      );
   }
 
   static bool getSaveUserLoginData(){
-     return sharedPreferences!.getBool(
+     return _sharedPreferences!.getBool(
          SharedPreferencesKeys.saveUserLoginBool.toString()
      ) ?? false;
   }
@@ -26,13 +28,13 @@ class SharedPreferencesHelper {
   //Base64String
 
   static void setBase64Authentication(String base64String) async {
-     sharedPreferences!.setString(
+     _sharedPreferences!.setString(
          SharedPreferencesKeys.base64Authentication.toString(), base64String
      );
   }
 
   static String getBase64Authentication() {
-     return sharedPreferences!.getString(
+     return _sharedPreferences!.getString(
          SharedPreferencesKeys.base64Authentication.toString()
      ) ?? "";
   }
