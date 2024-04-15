@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/authentication/authentication_vm.dart';
-import 'package:vroom_campus_app/authentication/register/register_view.dart';
-
-import 'login/login_view.dart';
 
 //Run this for testing the widget we kick this out later ;)
 void main() {
@@ -35,7 +32,9 @@ class AuthenticationView extends StatelessWidget {
     //TODO switch between login and register
     return ChangeNotifierProvider(
       create: (context)=> AuthenticationVM(),
-      child: RegisterView(),
+      child: Consumer<AuthenticationVM>(builder: (context, vm, child) {
+        return vm.currentSelection;
+      }),
     );
   }
 }
