@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vroom_campus_app/authentication/authentication_vm.dart';
 import 'package:vroom_campus_app/authentication/register/register_view.dart';
 
 import 'login/login_view.dart';
@@ -24,13 +26,16 @@ class TestWidget extends StatelessWidget {
   }
 }
 
-// TODO Maybe this shouldn't be a separate view?
 class AuthenticationView extends StatelessWidget {
   const AuthenticationView({super.key});
 
 
   @override
   Widget build(BuildContext context) {
-    return const RegisterView();
+    //TODO switch between login and register
+    return ChangeNotifierProvider(
+      create: (context)=> AuthenticationVM(),
+      child: RegisterView(),
+    );
   }
 }
