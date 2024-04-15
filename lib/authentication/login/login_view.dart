@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import 'login_vm.dart';
 
-class LoginWidget extends StatelessWidget {
-  const LoginWidget({super.key});
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
 
 
   @override

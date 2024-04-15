@@ -31,6 +31,6 @@ class AuthenticationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginWidget();
+    return const RegisterView();
   }
 }
