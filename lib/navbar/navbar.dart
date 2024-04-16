@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'navbar_provider.dart';
+import 'navbar_vm.dart';
 
 void main() => runApp(const TestWidget());
 
@@ -10,7 +10,7 @@ class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => NavigationProvider(),
+      create: (_) => NavigationVM(),
       child: const MaterialApp(
         home: BottomNavBar(),
       ),
@@ -27,10 +27,10 @@ class BottomNavBar extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Consumer<NavigationProvider>(
+      body: Consumer<NavigationVM>(
         builder: (context, provider, child) => provider.currentPage,
       ),
-      bottomNavigationBar: Consumer<NavigationProvider>(
+      bottomNavigationBar: Consumer<NavigationVM>(
         builder: (context, provider, child) {
           return BottomNavigationBar(
             currentIndex: provider.currentIndex,

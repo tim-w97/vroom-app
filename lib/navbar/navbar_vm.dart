@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages_view.dart';
 
-class NavigationProvider with ChangeNotifier {
+class NavigationVM with ChangeNotifier {
   List<NavBarItem> items = [
     NavBarItem(widget: ProfilePage(), label: "Profil", icon: Icons.person),
     NavBarItem(widget: LogBookPage(), label: "Fahrtenbuch", icon: Icons.book),
