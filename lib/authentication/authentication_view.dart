@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vroom_campus_app/userdefaults/shared_preferences_helper.dart';
-
-import 'login_widget.dart';
+import 'package:provider/provider.dart';
+import 'package:vroom_campus_app/authentication/authentication_vm.dart';
 
 //Run this for testing the widget we kick this out later ;)
 void main() {
@@ -19,19 +18,23 @@ class TestWidget extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
         useMaterial3: true,
       ),
-      home: AuthenticationView(),
+      home: const AuthenticationView(),
     );
   }
 }
-//
 
 class AuthenticationView extends StatelessWidget {
-  AuthenticationView({super.key});
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  const AuthenticationView({super.key});
+
 
   @override
   Widget build(BuildContext context) {
-    return LoginWidget(usernameController: usernameController, passwordController: passwordController);
+    //TODO switch between login and register
+    return ChangeNotifierProvider(
+      create: (context)=> AuthenticationVM(),
+      child: Consumer<AuthenticationVM>(builder: (context, vm, child) {
+        return vm.currentSelection;
+      }),
+    );
   }
 }
