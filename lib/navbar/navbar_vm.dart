@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vroom_campus_app/authentication/authentication_view.dart';
 import 'placeholder_views.dart';
 
 class NavigationVM with ChangeNotifier {
   List<NavBarItem> items = [
-    NavBarItem(widget: const ProfilePage(), label: "Profil", icon: Icons.person),
+    NavBarItem(widget: const AuthenticationView(), label: "Profil", icon: Icons.person), //TODO This lead s to the Authentication screen for now :)
     NavBarItem(widget: const LogBookPage(), label: "Fahrtenbuch", icon: Icons.book),
     NavBarItem(widget: const SettingsPage(), label: "Einstellungen", icon: Icons.settings),
   ];

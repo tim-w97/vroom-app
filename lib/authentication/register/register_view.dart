@@ -12,10 +12,6 @@ class RegisterView extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (context) => RegisterVM(),
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-            title: const Text("Register"),
-          ),
           body: Center(
               child: Column(
             children: [

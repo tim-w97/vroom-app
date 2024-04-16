@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//THESE ARE JUST PLACE HOLDERS
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 

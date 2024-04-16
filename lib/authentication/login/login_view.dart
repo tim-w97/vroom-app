@@ -13,10 +13,6 @@ class LoginView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => LoginVM(),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text("Login"),
-        ),
         body: Center(
           child: Column(
             children: [
