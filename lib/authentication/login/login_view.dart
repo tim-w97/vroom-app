@@ -23,7 +23,7 @@ class LoginView extends StatelessWidget {
               Consumer<AuthenticationVM>(builder: (context,vm,child) {
                 return ElevatedButton(onPressed: () {
                   vm.toggleScreen();
-                }, child: Text(vm.currentScreen.toString()));
+                }, child: const Text("Switch to register"));
               }),
               Consumer<LoginVM>(builder: (context, vm, child) {
                 return Column(

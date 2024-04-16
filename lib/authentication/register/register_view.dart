@@ -25,7 +25,7 @@ class RegisterView extends StatelessWidget {
                       onPressed: () {
                         vm.toggleScreen();
                       },
-                      child: Text(vm.currentScreen.toString()));
+                      child: const Text("Switch to login"));
                 },
               ),
               Consumer<RegisterVM>(
