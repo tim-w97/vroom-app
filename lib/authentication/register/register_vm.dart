@@ -6,6 +6,7 @@ class RegisterVM extends ChangeNotifier {
   String _username = "";
   String _password = "";
   String _email = "";
+  bool _passwordIsValid = false;
 
   String get username {
     return _username;
@@ -19,11 +20,8 @@ class RegisterVM extends ChangeNotifier {
     return _password;
   }
 
-  void setPassword(String password,String validatePassword) {
-    if(password == validatePassword) {
-      _password = password;
-    }
-    //TODO Else display error to screen that passwords don't match
+  void setPassword(String password) {
+    _password = password;
   }
 
   String get email {
@@ -35,5 +33,15 @@ class RegisterVM extends ChangeNotifier {
     _email = email;
   }
 
+  //TODO move to sepreat function
+  void validatePassword(String validatePassword) {
+    if(_password == validatePassword) {
+      _passwordIsValid = true;
+    } else {
+      _passwordIsValid = false;
+      //TODO Else display error to screen that passwords don't match
+    }
+
+  }
 
 }
