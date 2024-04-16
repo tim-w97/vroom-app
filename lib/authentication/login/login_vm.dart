@@ -44,9 +44,7 @@ class LoginVM extends ChangeNotifier {
   void decodeBase64() {
     Codec<String,String> authBase64 = utf8.fuse(base64);
     _decodedString = authBase64.encode('$_username:$_password');
-    print(_sharedPreferences.getString(SharedPreferencesKeys.base64Authentication.toString()));
     _sharedPreferences.setString(SharedPreferencesKeys.base64Authentication.toString(), _decodedString);
-    print(_sharedPreferences.getString(SharedPreferencesKeys.base64Authentication.toString()));
     notifyListeners();
   }
 

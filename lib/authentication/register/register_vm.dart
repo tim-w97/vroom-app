@@ -33,6 +33,10 @@ class RegisterVM extends ChangeNotifier {
     _email = email;
   }
 
+  bool get passwordIsValid {
+    return _passwordIsValid;
+  }
+
   //TODO move to sepreat function
   void validatePassword(String validatePassword) {
     if(_password == validatePassword) {
