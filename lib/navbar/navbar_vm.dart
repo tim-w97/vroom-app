@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'pages_view.dart';
+import 'placeholder_views.dart';
 
 class NavigationVM with ChangeNotifier {
   List<NavBarItem> items = [
-    NavBarItem(widget: ProfilePage(), label: "Profil", icon: Icons.person),
-    NavBarItem(widget: LogBookPage(), label: "Fahrtenbuch", icon: Icons.book),
-    NavBarItem(widget: SettingsPage(), label: "Einstellungen", icon: Icons.settings),
+    NavBarItem(widget: const ProfilePage(), label: "Profil", icon: Icons.person),
+    NavBarItem(widget: const LogBookPage(), label: "Fahrtenbuch", icon: Icons.book),
+    NavBarItem(widget: const SettingsPage(), label: "Einstellungen", icon: Icons.settings),
   ];
 
   int _currentIndex = 0;

@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Profilseite"));
+    return const Center(child: Text("Profilseite"));
   }
 }
 
 class LogBookPage extends StatelessWidget {
+  const LogBookPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Fahrtenbuchseite"));
+    return const Center(child: Text("Fahrtenbuchseite"));
   }
 }
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("Einstellungsseite"));
+    return const Center(child: Text("Einstellungsseite"));
   }
 }
