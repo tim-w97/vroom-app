@@ -1,7 +1,9 @@
+import 'dart:ui';
+
 import 'gender.dart';
 
 class User {
-  //Requierd
+  //Required
   String _firstName = "";
   String _surName = "";
   String _email = "";
@@ -12,6 +14,7 @@ class User {
   String ?_phoneNumber;
   Gender ?_gender;
   String ?_description;
+  Image ? _image; //TODO Default picture when null
 
   //TODO constructor
 }
