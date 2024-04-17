@@ -6,7 +6,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Profilseite"));
+    return const Center(child: Text("Profile"));
   }
 }
 
@@ -15,7 +15,7 @@ class LogBookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Fahrtenbuchseite"));
+    return const Center(child: Text("Driver's log"));
   }
 }
 
@@ -24,6 +24,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Einstellungsseite"));
+    return const Center(child: Text("Settings"));
   }
 }

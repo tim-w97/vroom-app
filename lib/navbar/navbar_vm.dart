@@ -4,9 +4,9 @@ import 'placeholder_views.dart';
 
 class NavigationVM with ChangeNotifier {
   List<NavBarItem> items = [
-    NavBarItem(widget: const AuthenticationView(), label: "Profil", icon: Icons.person), //TODO This lead s to the Authentication screen for now :)
-    NavBarItem(widget: const LogBookPage(), label: "Fahrtenbuch", icon: Icons.book),
-    NavBarItem(widget: const SettingsPage(), label: "Einstellungen", icon: Icons.settings),
+    NavBarItem(widget: const AuthenticationView(), label: "Profile", icon: Icons.person), //TODO This lead s to the Authentication screen for now :)
+    NavBarItem(widget: const LogBookPage(), label: "Driver's log", icon: Icons.book),
+    NavBarItem(widget: const SettingsPage(), label: "Settings", icon: Icons.settings),
   ];
 
   int _currentIndex = 0;
