@@ -58,6 +58,7 @@ class RegisterView extends StatelessWidget {
                           onChanged: (value) {
                             vm.setPassword(value);
                           },
+                          obscureText: true,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Password'),
@@ -70,11 +71,18 @@ class RegisterView extends StatelessWidget {
                           onChanged: (value) {
                             vm.validatePassword(value);
                           },
+                          obscureText: true,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Repeat Password'),
                         ),
                       ),
+                      const Padding(padding: EdgeInsets.all(10)),
+                      ElevatedButton(
+                          onPressed: () {
+                            //TODO Submit Registration
+                          },
+                          child: const Text("Register"))
                     ],
                   );
                 },
