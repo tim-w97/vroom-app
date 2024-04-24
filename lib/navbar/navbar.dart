@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'navbar_vm.dart';
+import '/style/dark_theme.dart';
 
 void main() => runApp(const TestWidget());
 
@@ -9,7 +10,11 @@ class TestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      // Beginn Einbinden des Styles
+      darkTheme: getDarkTheme(),
+      themeMode: ThemeMode.dark,
+      // Ende Einbinden des Styles
       home: BottomNavBar(),
     );
   }

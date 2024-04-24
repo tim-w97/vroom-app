@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../style/color_schemes.dart'; //einbinden des color schemes
+import '/style/color_schemes.dart'; //einbinden des color schemes
 
 ThemeData getDarkTheme() {
   var theme = ThemeData.from(
