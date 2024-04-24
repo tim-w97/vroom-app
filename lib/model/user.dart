@@ -3,13 +3,13 @@ import 'dart:ui';
 import 'gender.dart';
 
 class User {
-  //Required
+
   String firstName = "";
   String surName = "";
   String email = "";
   String password = "";
 
-  //Optional
+
   String? phoneNumber;
   Gender? gender;
   String? description;
@@ -18,7 +18,7 @@ class User {
   List<String>? favoriteDrivers;
   List<String>? rememberedRides;
 
-  User({
+  User ({
     required this.firstName,
     required this.surName,
     required this.email,
@@ -31,5 +31,5 @@ class User {
     this.favoriteDrivers,
     this.rememberedRides,
   });
-  
+
 }
