@@ -1,12 +1,23 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vroom_campus_app/authentication/authentication_view.dart';
 import 'placeholder_views.dart';
 
 class NavigationVM with ChangeNotifier {
   List<NavBarItem> items = [
-    NavBarItem(widget: const AuthenticationView(), label: "Profile", icon: Icons.person), //TODO This lead s to the Authentication screen for now :)
-    NavBarItem(widget: const LogBookPage(), label: "Driver's log", icon: Icons.book),
-    NavBarItem(widget: const SettingsPage(), label: "Settings", icon: Icons.settings),
+    NavBarItem(
+        widget: const AuthenticationView(),
+        label: "profile_navbar".tr(),
+        icon: Icons
+            .person), //TODO This lead s to the Authentication screen for now :)
+    NavBarItem(
+        widget: const LogBookPage(),
+        label: "drivers_log_navbar".tr(),
+        icon: Icons.book),
+    NavBarItem(
+        widget: const SettingsPage(),
+        label: "settings_navbar".tr(),
+        icon: Icons.settings),
   ];
 
   int _currentIndex = 0;

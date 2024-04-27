@@ -1,0 +1,12 @@
+{
+  "navbar": {},
+  "profile_navbar": "Profile",
+  "drivers_log_navbar": "Driver's log",
+  "settings_navbar": "Settings",
+
+  "login": {},
+  "username_email_login": "Username/E-Mail",
+  "password_login": "Password",
+  "switch_register": "Switch to register",
+  "login_button": "Login"
+}
