@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/rides/ride_vm.dart';
 
@@ -10,10 +11,18 @@ class RideView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RideVM(),
       child: Consumer<RideVM>(builder: (context, vm, child) {
-        return const Scaffold(
+        return Scaffold(
           body: Center(
-            child: Column(
-              children: [Text("Rides")],
+            child: FlutterMap(
+              options: MapOptions(),
+              children: [
+                TileLayer(
+                  urlTemplate:
+                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                  // Plenty of other options available!
+                )
+              ],
             ),
           ),
         );
