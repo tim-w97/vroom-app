@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vroom_campus_app/authentication/authentication_view.dart';
+import 'package:vroom_campus_app/rides/ride_view.dart';
 import 'placeholder_views.dart';
 
 class NavigationVM with ChangeNotifier {
@@ -11,7 +12,7 @@ class NavigationVM with ChangeNotifier {
         icon: Icons
             .person), //TODO This lead s to the Authentication screen for now :)
     NavBarItem(
-        widget: const LogBookPage(),
+        widget: const RideView(),
         label: "drivers_log_navbar".tr(),
         icon: Icons.book),
     NavBarItem(
