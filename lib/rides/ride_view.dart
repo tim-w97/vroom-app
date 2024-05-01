@@ -14,7 +14,7 @@ class RideView extends StatelessWidget {
         return Scaffold(
           body: Center(
             child: FlutterMap(
-              options: MapOptions(),
+              options: const MapOptions(),
               children: [
                 TileLayer(
                   urlTemplate:
