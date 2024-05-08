@@ -23,7 +23,7 @@ ThemeData getDarkTheme() {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
         foregroundColor: theme.colorScheme.onPrimary,
         backgroundColor: theme.colorScheme.primary,
       ),
