@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:vroom_campus_app/rides/ride_vm.dart';
 
 class RideView extends StatelessWidget {
@@ -14,7 +15,7 @@ class RideView extends StatelessWidget {
         return Scaffold(
           body: Center(
             child: FlutterMap(
-              options: const MapOptions(),
+              options: const MapOptions(initialCenter: LatLng(50.31, 11.91)),
               children: [
                 TileLayer(
                   urlTemplate:
