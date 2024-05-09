@@ -12,10 +12,8 @@ class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Beginn Einbinden des Styles
       theme: getLightTheme(),
       themeMode: ThemeMode.light,
-      // Ende Einbinden des Styles
       home: BottomNavBar(),
     );
   }
@@ -29,7 +27,7 @@ class BottomNavBar extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => NavigationVM(),
       child: Scaffold(
-        appBar: AppBar(
+        appBar: AppBar( //TODO WRAP WITH CONSUMER :)
           title: const Text('Home'),
         ),
         body: Consumer<NavigationVM>(

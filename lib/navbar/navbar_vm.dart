@@ -12,6 +12,7 @@ class NavigationVM with ChangeNotifier {
         icon: Icons
             .person), //TODO This lead s to the Authentication screen for now :)
     NavBarItem(
+        isAppbarHidden: true,
         widget: const RideView(),
         label: "drivers_log_navbar".tr(),
         icon: Icons.book),
@@ -30,6 +31,7 @@ class NavigationVM with ChangeNotifier {
     notifyListeners();
   }
 
+  bool get isAppbarHidden => items[_currentIndex].isAppbarHidden ?? false;
   Widget get currentPage => items[_currentIndex].widget;
 }
 
@@ -37,6 +39,7 @@ class NavBarItem {
   final Widget widget;
   final String label;
   final IconData icon;
+  bool ?isAppbarHidden = false;
 
-  NavBarItem({required this.widget, required this.label, required this.icon});
+  NavBarItem({required this.widget, required this.label, required this.icon,this.isAppbarHidden});
 }
