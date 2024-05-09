@@ -1,0 +1,13 @@
+{
+  "navbar": {},
+  "profile_navbar": "Profil",
+  "drivers_log_navbar": "Fahrplan",
+  "settings_navbar": "Einstellungen",
+
+  "login": {},
+  "username_email_login": "Nutzername/E-Mail",
+  "password_login": "Passwort",
+  "switch_register": "Zu Registrierung wechseln",
+  "login_button": "Einloggen"
+
+}

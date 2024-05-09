@@ -1,0 +1,36 @@
+[
+  {
+    "id": "1",
+    "driver": "beispielfahrer1@email.com",
+    "passengers": [
+      "mitfahrer1@email.com",
+      "mitfahrer2@email.com"
+    ],
+    "departureTime": "2024-01-01T12:00:00.000Z",
+    "repeat": 0,
+    "startLocation": {
+      "latitude": 0,
+      "longitude": 0
+    },
+    "endLocation": {
+      "latitude": 1,
+      "longitude": 1
+    }
+  },
+  {
+    "id": "2",
+    "driver": "beispielfahrer2@email.com",
+    "passengers": [
+      "mitfahrer3@email.com"
+    ],
+    "departureTime": "2024-04-04T12:00:00.000Z",
+    "startLocation": {
+      "latitude": 10,
+      "longitude": 10
+    },
+    "endLocation": {
+      "latitude": 20,
+      "longitude": 20
+    }
+  }
+]
