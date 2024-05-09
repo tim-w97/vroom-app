@@ -41,6 +41,9 @@ ThemeData getLightTheme() {
         borderRadius: BorderRadius.circular(6),
         borderSide: BorderSide(color: theme.colorScheme.error),
       ),
+      labelStyle: TextStyle(
+        color: theme.colorScheme.onPrimary
+      )
     ),
     snackBarTheme: const SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
