@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vroom_campus_app/style/dark_theme.dart';
+import 'package:vroom_campus_app/style/light_theme.dart';
 import 'package:vroom_campus_app/userdefaults/shared_preferences_helper.dart';
 
 import 'navbar/navbar.dart';
@@ -16,10 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: const ColorScheme.light(),
-        useMaterial3: true,
-      ),
+      theme: getLightTheme(),
       home: const BottomNavBar()
     );
   }

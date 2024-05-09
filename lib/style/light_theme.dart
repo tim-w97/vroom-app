@@ -7,9 +7,9 @@ ThemeData getLightTheme() {
     useMaterial3: true,
     colorScheme: lightColorScheme,
     textTheme: TextTheme(
-      displayLarge: GoogleFonts.sora(fontSize: 45, color: Colors.black, fontWeight: FontWeight.w300),
-      bodyMedium: GoogleFonts.sora(fontSize: 25, color: const Color(0xFF000000)),
-      bodySmall: GoogleFonts.sora(fontSize: 25, color: const Color(0xFF000000)),
+      displayLarge: GoogleFonts.zenMaruGothic(fontSize: 45, color: Colors.black, fontWeight: FontWeight.w300),
+      bodyMedium: GoogleFonts.zenMaruGothic(fontSize: 25, color: const Color(0xFF000000)),
+      bodySmall: GoogleFonts.zenMaruGothic(fontSize: 25, color: const Color(0xFF000000)),
     ),
   );
   theme = theme.copyWith(
@@ -20,7 +20,7 @@ ThemeData getLightTheme() {
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
         foregroundColor: theme.colorScheme.onPrimary,
-        backgroundColor: theme.colorScheme.primary.withOpacity(0.3),
+        backgroundColor: theme.colorScheme.primary,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
