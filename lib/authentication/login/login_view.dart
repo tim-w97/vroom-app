@@ -12,58 +12,56 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => LoginVM(),
-      child: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              Consumer<AuthenticationVM>(builder: (context, vm, child) {
-                return ElevatedButton(
-                    onPressed: () {
-                      vm.toggleScreen();
-                    },
-                    child: Text("switch_register".tr()));
-              }),
-              Consumer<LoginVM>(builder: (context, vm, child) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(vm.decodedString),
-                    const Padding(padding: EdgeInsets.all(10)),
-                    SizedBox(
-                      width: 300,
-                      child: TextField(
-                        onChanged: (value) {
-                          vm.setUsername(value);
-                        },
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText: "username_email_login".tr()),
-                      ),
+      child: Center(
+        child: Column(
+          children: [
+            Consumer<AuthenticationVM>(builder: (context, vm, child) {
+              return ElevatedButton(
+                  onPressed: () {
+                    vm.toggleScreen();
+                  },
+                  child: Text("switch_register".tr()));
+            }),
+            Consumer<LoginVM>(builder: (context, vm, child) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(vm.decodedString),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  SizedBox(
+                    width: 300,
+                    child: TextField(
+                      onChanged: (value) {
+                        vm.setUsername(value);
+                      },
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: "username_email_login".tr()),
                     ),
-                    const Padding(padding: EdgeInsets.all(10)),
-                    SizedBox(
-                      width: 300,
-                      child: TextField(
-                        onChanged: (value) {
-                          vm.setPassword(value);
-                        },
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText: "password_login".tr()),
-                      ),
+                  ),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  SizedBox(
+                    width: 300,
+                    child: TextField(
+                      onChanged: (value) {
+                        vm.setPassword(value);
+                      },
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: "password_login".tr()),
                     ),
-                    const Padding(padding: EdgeInsets.all(10)),
-                    ElevatedButton(
-                        onPressed: () {
-                          vm.decodeBase64();
-                        },
-                        child: Text("login_button".tr()))
-                  ],
-                );
-              }),
-            ],
-          ),
+                  ),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  ElevatedButton(
+                      onPressed: () {
+                        vm.decodeBase64();
+                      },
+                      child: Text("login_button".tr()))
+                ],
+              );
+            }),
+          ],
         ),
       ),
     );

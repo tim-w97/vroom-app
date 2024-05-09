@@ -25,9 +25,9 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => NavigationVM(),
+      create: (_) => NavigationVM(), //TODO Wrap the Scaffold in a Consumer so that we can toggle the nav bar
       child: Scaffold(
-        appBar: AppBar( //TODO WRAP WITH CONSUMER :)
+        appBar: /*NavigationVM().isAppbarHidden ? null :*/ AppBar(
           title: const Text('Home'),
         ),
         body: Consumer<NavigationVM>(
