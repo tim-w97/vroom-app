@@ -5,6 +5,17 @@ class CarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: Column(
+        children: [
+          const Text("Mit welchem Auto fährst du?"),
+          ElevatedButton(
+              onPressed: () {
+                print("+");
+              },
+              child: const Text("+ Neues Fahrzeug"))
+        ],
+      ),
+    );
   }
 }
