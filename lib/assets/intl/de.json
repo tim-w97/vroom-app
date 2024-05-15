@@ -8,6 +8,9 @@
   "username_email_login": "Nutzername/E-Mail",
   "password_login": "Passwort",
   "switch_register": "Zu Registrierung wechseln",
-  "login_button": "Einloggen"
+  "login_button": "Einloggen",
+
+  "profile": {},
+  "personal_data": "Persönliche Daten"
 
 }

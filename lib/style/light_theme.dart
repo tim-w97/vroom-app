@@ -7,9 +7,12 @@ ThemeData getLightTheme() {
     useMaterial3: true,
     colorScheme: lightColorScheme,
     textTheme: TextTheme(
-      displayLarge: GoogleFonts.zenMaruGothic(fontSize: 45, color: Colors.black, fontWeight: FontWeight.w300),
-      bodyMedium: GoogleFonts.zenMaruGothic(fontSize: 25, color: const Color(0xFF000000)),
-      bodySmall: GoogleFonts.zenMaruGothic(fontSize: 25, color: const Color(0xFF000000)),
+      displayLarge: GoogleFonts.zenMaruGothic(
+          fontSize: 45, color: Colors.black, fontWeight: FontWeight.w300),
+      bodyMedium: GoogleFonts.zenMaruGothic(
+          fontSize: 25, color: const Color(0xFF000000)),
+      bodySmall: GoogleFonts.zenMaruGothic(
+          fontSize: 25, color: const Color(0xFF000000)),
     ),
   );
   theme = theme.copyWith(
@@ -24,30 +27,30 @@ ThemeData getLightTheme() {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      fillColor: theme.colorScheme.surface,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: BorderSide(color: theme.colorScheme.outlineVariant),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: BorderSide(color: theme.colorScheme.outlineVariant),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: BorderSide(color: theme.colorScheme.outline, width: 2),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: BorderSide(color: theme.colorScheme.error),
-      ),
-      labelStyle: TextStyle(
-        color: theme.colorScheme.onPrimary
-      )
-    ),
+        fillColor: theme.colorScheme.surface,
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.outlineVariant),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.outline, width: 2),
+        ),
+        /*enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(color: theme.colorScheme.outlineVariant),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(color: theme.colorScheme.outline, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: BorderSide(color: theme.colorScheme.error),
+        ),*/
+        labelStyle: TextStyle(color: theme.colorScheme.onPrimary)),
     snackBarTheme: const SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(6))),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(6))),
     ),
     checkboxTheme: const CheckboxThemeData(
       shape: RoundedRectangleBorder(
