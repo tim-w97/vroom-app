@@ -11,28 +11,33 @@ class MapView extends StatelessWidget {
       children: <Widget>[
         FlutterMap(
           options: const MapOptions(initialCenter: LatLng(50.31, 11.91)),
-          children:[
+          children: [
             TileLayer(
-              urlTemplate:
-              'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName: 'dev.fleaflet.flutter_map.example',
               // Plenty of other options available!
             )
           ],
         ),
         Align(
-          alignment: Alignment.bottomRight,
+          alignment: Alignment.topLeft,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(8, 30, 0, 0),
             child: FloatingActionButton(
                 onPressed: () {
-                  Navigator.pop(context,
+                  Navigator.pop(
+                    context,
                     MaterialPageRoute(builder: (context) => const MapView()),
                   );
                 },
                 child: const Icon(Icons.arrow_back)),
           ),
         ),
+        DraggableScrollableSheet(
+            builder:
+                (BuildContext context, ScrollController scrollController) {
+                return Placeholder(); //TODO Insert form here
+                })
       ],
     );
   }
