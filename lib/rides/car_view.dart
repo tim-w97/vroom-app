@@ -19,13 +19,19 @@ class CarView extends StatelessWidget {
               },
               child: const Text("+ Neues Fahrzeug")),
           const Padding(padding: EdgeInsets.all(10)),
-          FloatingActionButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const MapView()),
-                );
-              },
-              child: const Icon(Icons.arrow_forward)),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const MapView()),
+                    );
+                  },
+                  child: const Icon(Icons.arrow_forward)),
+            ),
+          ),
         ],
       ),
     );
