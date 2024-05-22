@@ -26,6 +26,11 @@ ThemeData getLightTheme() {
         backgroundColor: theme.colorScheme.primary,
       ),
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: theme.colorScheme.onPrimary,
+        backgroundColor: theme.colorScheme.primary,
+        shape: const CircleBorder()
+    ),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: theme.colorScheme.surface,
         border: UnderlineInputBorder(
