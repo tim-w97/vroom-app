@@ -13,6 +13,10 @@ class NavigationVM with ChangeNotifier {
         icon: Icons
             .home), //TODO This lead s to the Authentication screen for now :)*/
     NavBarItem(
+        widget: const ProfileView(),
+        label: "profile_navbar".tr(),
+        icon: Icons.person),
+    NavBarItem(
         isAppbarHidden: true,
         widget: const RideView(),
         label: "drivers_log_navbar".tr(),
@@ -21,10 +25,6 @@ class NavigationVM with ChangeNotifier {
         widget: const SettingsPage(),
         label: "settings_navbar".tr(),
         icon: Icons.settings),
-    NavBarItem(
-        widget: const ProfileView(),
-        label: "profile_navbar".tr(),
-        icon: Icons.person),
   ];
 
   int _currentIndex = 0;
