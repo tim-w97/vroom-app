@@ -1,46 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vroom_campus_app/profile/car_list_tile.dart';
 import 'package:vroom_campus_app/profile/profile_vm.dart';
-
-import '../model/car.dart';
-import '../model/multi_button_action.dart';
 import '../widgets/multi_button.dart';
-
-/*class ProfileView extends StatefulWidget {
-  const ProfileView({super.key});
-
-  @override
-  State<StatefulWidget> createState() => _ProfileViewState();
-}*/
-
-/*class _ProfileViewState extends State<ProfileView> {
-  final List<MultiButtonAction> _actions = [
-    MultiButtonAction(
-        name: "W",
-        action: () {
-          print("test");
-        }),
-    MultiButtonAction(name: "M", action: () {}),
-    MultiButtonAction(name: "D", action: () {}),
-  ]; //in vm auslagern
-
-  final List<Car> _cars = [
-    Car(
-        model: "Audi_A1",
-        licensePlate: "WUN_TI",
-        color: "schwarz",
-        imageURL: "URL"),
-    Car(model: "Passat", licensePlate: "HO_CG", color: "blau", imageURL: "URL"),
-    Car(model: "Golf", licensePlate: "TOR_TI", color: "grau", imageURL: "URL")
-  ];
-
-  int _activeButtonIndex = 0;
-
-  void _onTapHandler(int buttonIndex) {
-    setState(() => _activeButtonIndex = buttonIndex);
-  } //statt set provider*/
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -101,19 +63,20 @@ class ProfileView extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 32),
-                              /*MultiButton(
-          actions: () {print("test");},
-          activeButtonIndex: vm.currentIndex,
-          onTap: ,
-          activeColor: Colors.blue,
-          activeTextStyle: const TextStyle(color: Colors.white),
-          ),*/
+                              MultiButton(
+                                actions: vm.genderSelect,
+                                activeButtonIndex: vm.currentIndex,
+                                onTap: vm.setIndex,
+                                activeColor: Colors.blue,
+                                activeTextStyle:
+                                    const TextStyle(color: Colors.white),
+                              ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text("Your Cars".tr()),
-                        SizedBox(height: 8),
+                       const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
