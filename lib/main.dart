@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // Die Anfrage war erfolgreich
       var data = json.decode(response.body);
       print("succes");
-      //print(data);
+      print(data);
     } else {
       // Die Anfrage war nicht erfolgreich
       print("not success");

@@ -1,51 +1,43 @@
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vroom_campus_app/userdefaults/keys.dart';
-import 'package:vroom_campus_app/userdefaults/shared_preferences_helper.dart';
-
 class LoginVM extends ChangeNotifier {
-  late final SharedPreferences _sharedPreferences;
-  String _decodedString = "";
   String _username = "";
   String _password = "";
-  //bool  _saveLoginInfo; //TODO
-
-  LoginVM() {
-    _initSharedPreferences();
-  }
-
-  String get username {
-    return _username;
-  }
+  String decodedString = "";
 
   void setUsername(String username) {
     _username = username;
-  }
-
-  String get password {
-    return _password;
+    notifyListeners();
   }
 
   void setPassword(String password) {
     _password = password;
-  }
-
-  String get decodedString {
-    return _decodedString;
-  }
-
-  Future<void> _initSharedPreferences() async {
-    _sharedPreferences = await SharedPreferencesHelper.getInstance();
-  }
-
-  void decodeBase64() {
-    Codec<String,String> authBase64 = utf8.fuse(base64);
-    _decodedString = authBase64.encode('$_username:$_password');
-    _sharedPreferences.setString(SharedPreferencesKeys.base64Authentication.toString(), _decodedString);
     notifyListeners();
   }
 
+  Future<void> login() async {
+    final String basicAuth = 'Basic ' + base64Encode(utf8.encode('$_username:$_password'));
+
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8080/AuthController/login'), // Ersetze mit deiner IP-Adresse
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'authorization': basicAuth,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      decodedString = jsonDecode(response.body);
+      notifyListeners();
+    } else {
+      throw Exception('Failed to login');
+    }
+  }
+
+  void decodeBase64() {
+    decodedString = utf8.decode(base64Decode(_username));
+    notifyListeners();
+  }
 }
