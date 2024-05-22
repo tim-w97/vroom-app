@@ -21,7 +21,7 @@ class LoginVM extends ChangeNotifier {
     final String basicAuth = 'Basic ' + base64Encode(utf8.encode('$_username:$_password'));
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:8080/AuthController/login'), // Ersetze mit deiner IP-Adresse
+      Uri.parse('http://10.0.2.2:8080/login'), // Ersetze mit deiner IP-Adresse
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'authorization': basicAuth,
