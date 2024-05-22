@@ -6,7 +6,5 @@ class RideVM extends ChangeNotifier {
   OpenRouteService openRouteService =
       OpenRouteService(apiKey: AppConfigs.API_KEY);
 
-  void test() {
-
-  }
+  void test() {}
 }

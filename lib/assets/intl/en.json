@@ -8,5 +8,13 @@
   "username_email_login": "Username/E-Mail",
   "password_login": "Password",
   "switch_register": "Switch to register",
-  "login_button": "Login"
+  "login_button": "Login",
+
+  "profile": {},
+  "personal_data": "Personal Data",
+  "name": "Name",
+  "surname": "Surname",
+  "e-mail": "E-Mail",
+  "your cars": "Your Cars",
+  "add new car": "Add new Car"
 }

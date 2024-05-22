@@ -2,15 +2,20 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vroom_campus_app/authentication/authentication_view.dart';
 import 'package:vroom_campus_app/rides/ride_view.dart';
+import '../profile/profile_view.dart';
 import 'placeholder_views.dart';
 
 class NavigationVM with ChangeNotifier {
   List<NavBarItem> items = [
-    NavBarItem(
+    /*NavBarItem(
         widget: const AuthenticationView(),
-        label: "profile_navbar".tr(),
+        label: "auth_navbar",
         icon: Icons
-            .person), //TODO This lead s to the Authentication screen for now :)
+            .home), //TODO This lead s to the Authentication screen for now :)*/
+    NavBarItem(
+        widget: const ProfileView(),
+        label: "profile_navbar".tr(),
+        icon: Icons.person),
     NavBarItem(
         isAppbarHidden: true,
         widget: const RideView(),
@@ -39,7 +44,11 @@ class NavBarItem {
   final Widget widget;
   final String label;
   final IconData icon;
-  bool ?isAppbarHidden = false;
+  bool? isAppbarHidden = false;
 
-  NavBarItem({required this.widget, required this.label, required this.icon,this.isAppbarHidden});
+  NavBarItem(
+      {required this.widget,
+      required this.label,
+      required this.icon,
+      this.isAppbarHidden});
 }
