@@ -21,17 +21,21 @@ class LoginVM extends ChangeNotifier {
     final String basicAuth = 'Basic ' + base64Encode(utf8.encode('$_username:$_password'));
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:8080/login'), // Ersetze mit deiner IP-Adresse
+      Uri.parse('http://10.0.2.2:8080/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'authorization': basicAuth,
       },
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       decodedString = jsonDecode(response.body);
+      print(response.statusCode);
+      print("Login successfull");
       notifyListeners();
     } else {
+      print("Login not successfull");
+      print(response.statusCode);
       throw Exception('Failed to login');
     }
   }
