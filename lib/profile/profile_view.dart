@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vroom_campus_app/profile/car_list_tile.dart';
 
+import '../model/car.dart';
 import '../model/multi_button_action.dart';
 import '../widgets/multi_button.dart';
 
@@ -21,6 +23,16 @@ class _ProfileViewState extends State<ProfileView> {
     MultiButtonAction(name: "M", action: () {}),
     MultiButtonAction(name: "D", action: () {}),
   ]; //in vm auslagern
+
+  final List<Car> _cars = [
+    Car(
+        model: "Audi_A1",
+        licensePlate: "WUN_TI",
+        color: "schwarz",
+        imageURL: "URL"),
+    Car(model: "Passat", licensePlate: "HO_CG", color: "blau", imageURL: "URL"),
+    Car(model: "Golf", licensePlate: "TOR_TI", color: "grau", imageURL: "URL")
+  ];
 
   int _activeButtonIndex = 0;
 
@@ -50,7 +62,7 @@ class _ProfileViewState extends State<ProfileView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("personal_data".tr()),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 8),
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -64,16 +76,17 @@ class _ProfileViewState extends State<ProfileView> {
                             children: [
                               TextFormField(
                                 decoration:
-                                    InputDecoration(hintText: "Vorname"),
+                                    InputDecoration(hintText: "Name".tr()),
                               ),
                               const SizedBox(height: 8),
                               TextFormField(
                                 decoration:
-                                    InputDecoration(hintText: "Nachname"),
+                                    InputDecoration(hintText: "Surname".tr()),
                               ),
                               const SizedBox(height: 8),
                               TextFormField(
-                                decoration: InputDecoration(hintText: "E-Mail"),
+                                decoration:
+                                    InputDecoration(hintText: "E-mail".tr()),
                               ),
                             ],
                           ),
@@ -87,6 +100,31 @@ class _ProfileViewState extends State<ProfileView> {
                           activeTextStyle: const TextStyle(color: Colors.white),
                         ),
                       ],
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Text("Your Cars".tr()),
+                  SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: colorScheme.onSecondaryContainer,
+                      borderRadius: BorderRadius.circular(26),
+                    ),
+                    child: Column(
+                      children: _cars
+                          .map(
+                            (car) => CarListTile(
+                              car: car,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text("Add new car".tr()),
                     ),
                   )
                   //TODO: Button Passwort ändern

@@ -11,5 +11,10 @@
   "login_button": "Login",
 
   "profile": {},
-  "personal_data": "personal data"
+  "personal_data": "Personal Data",
+  "name": "Name",
+  "surname": "Surname",
+  "e-mail": "E-Mail",
+  "your cars": "Your Cars",
+  "add new car": "Add new Car"
 }

@@ -11,6 +11,11 @@
   "login_button": "Einloggen",
 
   "profile": {},
-  "personal_data": "Persönliche Daten"
+  "personal_data": "Persönliche Daten",
+  "name": "Vorname",
+  "surname": "Nachname",
+  "e-mail": "E-Mail",
+  "your cars": "Deine Fahrzeuge",
+  "add new car": "Neues Fahrzeug hinzufügen"
 
 }
