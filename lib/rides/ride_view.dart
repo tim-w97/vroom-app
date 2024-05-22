@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:provider/provider.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:vroom_campus_app/rides/car_view.dart';
 import 'package:vroom_campus_app/rides/ride_vm.dart';
 
 class RideView extends StatelessWidget {
@@ -13,17 +12,7 @@ class RideView extends StatelessWidget {
       create: (context) => RideVM(),
       child: Consumer<RideVM>(builder: (context, vm, child) {
         return Center(
-          child: FlutterMap(
-            options: const MapOptions(initialCenter: LatLng(50.31, 11.91)),
-            children: [
-              TileLayer(
-                urlTemplate:
-                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'dev.fleaflet.flutter_map.example',
-                // Plenty of other options available!
-              )
-            ],
-          ),
+          child: const CarView()
         );
       }),
     );
