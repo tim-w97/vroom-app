@@ -27,9 +27,10 @@ class LoginVM extends ChangeNotifier {
         'authorization': basicAuth,
       },
     );
+    print("okay");
 
     if (response.statusCode == 201) {
-      decodedString = jsonDecode(response.body);
+      final responseJson = jsonDecode(response.body);
       print(response.statusCode);
       print("Login successfull");
       notifyListeners();
