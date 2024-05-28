@@ -11,7 +11,7 @@ class LoginView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => LoginVM(),
       child: Scaffold(
-        appBar: AppBar(title: Text('Login')),
+        appBar: AppBar(title:const  Text('Login')),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -22,7 +22,7 @@ class LoginView extends StatelessWidget {
                     onPressed: () {
                       vm.toggleScreen();
                     },
-                    child: Text("Switch to Register"),
+                    child: const Text("Switch to Register"),
                   );
                 }),
                 Consumer<LoginVM>(builder: (context, vm, child) {
@@ -37,8 +37,8 @@ class LoginView extends StatelessWidget {
                           onChanged: (value) {
                             vm.setUsername(value);
                           },
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: "Username or Email"),
                         ),
                       ),
@@ -50,8 +50,8 @@ class LoginView extends StatelessWidget {
                             vm.setPassword(value);
                           },
                           obscureText: true,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: "Password"),
                         ),
                       ),
@@ -61,7 +61,7 @@ class LoginView extends StatelessWidget {
                           try {
                             await vm.login(); // POST-Request
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Login successful')),
+                              const SnackBar(content: Text('Login successful')),
                             );
                           } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -69,7 +69,7 @@ class LoginView extends StatelessWidget {
                             );
                           }
                         },
-                        child: Text("Login"),
+                        child:const Text("Login"),
                       ),
                     ],
                   );

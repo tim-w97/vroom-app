@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vroom_campus_app/authentication/authentication_view.dart';
 import 'package:vroom_campus_app/profile/profile_vm.dart';
 import '../widgets/multi_button.dart';
 
@@ -22,6 +23,16 @@ class ProfileView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const AuthenticationView()),
+                          );
+                        },
+                        child:const Text("Test Login")),
                     const CircleAvatar(
                       backgroundImage: NetworkImage(
                           "https://cdn-icons-png.flaticon.com/512/9203/9203764.png"),
@@ -76,7 +87,7 @@ class ProfileView extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Text("Your Cars".tr()),
-                       const SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
