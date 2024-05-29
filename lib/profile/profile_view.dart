@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vroom_campus_app/authentication/authentication_view.dart';
 import 'package:vroom_campus_app/profile/profile_vm.dart';
 import 'package:vroom_campus_app/widgets/edit_data_button.dart';
 import '../widgets/multi_button.dart';
@@ -28,6 +29,16 @@ class _ProfileView extends State<ProfileView> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const AuthenticationView()),
+                          );
+                        },
+                        child:const Text("Test Login")),
                     const CircleAvatar(
                       backgroundImage: NetworkImage(
                           "https://cdn-icons-png.flaticon.com/512/9203/9203764.png"),
@@ -64,18 +75,27 @@ class _ProfileView extends State<ProfileView> {
                                       enabled: vm.isEditing,
                                       decoration: InputDecoration(
                                           hintText: "Name".tr()),
+                                      onChanged: (value) {
+                                        vm.setName(value);
+                                      },
                                     ),
                                     const SizedBox(height: 8),
                                     TextFormField(
                                       enabled: vm.isEditing,
                                       decoration: InputDecoration(
                                           hintText: "Surname".tr()),
+                                      onChanged: (value) {
+                                        vm.setSurName(value);
+                                      },
                                     ),
                                     const SizedBox(height: 8),
                                     TextFormField(
                                       enabled: vm.isEditing,
                                       decoration: InputDecoration(
                                           hintText: "E-mail".tr()),
+                                      onChanged: (value) {
+                                        vm.setEMail(value);
+                                      },
                                     ),
                                   ],
                                 ),
