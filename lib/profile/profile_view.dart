@@ -2,11 +2,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/profile/profile_vm.dart';
+import 'package:vroom_campus_app/widgets/edit_data_button.dart';
 import '../widgets/multi_button.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
+  @override
+  State<ProfileView> createState() => _ProfileView();
+}
+
+class _ProfileView extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
@@ -32,7 +38,16 @@ class ProfileView extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("personal_data".tr()),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("personal_data".tr()),
+                            EditDataButton(
+                              onTap: vm.editButtonHandler,
+                              isEditing: vm.isEditing,
+                            )
+                          ],
+                        ),
                         const SizedBox(height: 8),
                         Container(
                           padding: const EdgeInsets.all(16),
@@ -46,16 +61,19 @@ class ProfileView extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     TextFormField(
+                                      enabled: vm.isEditing,
                                       decoration: InputDecoration(
                                           hintText: "Name".tr()),
                                     ),
                                     const SizedBox(height: 8),
                                     TextFormField(
+                                      enabled: vm.isEditing,
                                       decoration: InputDecoration(
                                           hintText: "Surname".tr()),
                                     ),
                                     const SizedBox(height: 8),
                                     TextFormField(
+                                      enabled: vm.isEditing,
                                       decoration: InputDecoration(
                                           hintText: "E-mail".tr()),
                                     ),
@@ -64,6 +82,7 @@ class ProfileView extends StatelessWidget {
                               ),
                               const SizedBox(height: 32),
                               MultiButton(
+                                enabled: vm.isEditing,
                                 actions: vm.genderSelect,
                                 activeButtonIndex: vm.currentIndex,
                                 onTap: vm.setIndex,
@@ -75,24 +94,54 @@ class ProfileView extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Text("Your Cars".tr()),
-                       const SizedBox(height: 8),
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: colorScheme.onSecondaryContainer,
-                            borderRadius: BorderRadius.circular(26),
-                          ),
-                          child: Column(
-                            children: vm.cars
-                                .map<Widget>(
-                                  (car) => Row(children: [
-                                    Text("${car.model} / ${car.licensePlate}")
-                                  ]),
-                                )
-                                .toList(),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Your Cars".tr()),
+                            EditDataButton(
+                              isEditing: vm.isEditingCars,
+                              onTap: vm.editCarsButtonHandler,
+                            ),
+                          ],
                         ),
+                        const SizedBox(height: 8),
+                        vm.cars.isNotEmpty
+                            ? Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: colorScheme.onSecondaryContainer,
+                                  borderRadius: BorderRadius.circular(26),
+                                ),
+                                child: Column(
+                                  children: vm.cars
+                                      .map<Widget>(
+                                        (car) => Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                                "${car.model} / ${car.licensePlate}"),
+                                            if (vm.isEditingCars)
+                                              GestureDetector(
+                                                onTap: () => vm.removeCar(car),
+                                                child: const Icon(
+                                                    Icons.delete_outline),
+                                              ),
+                                          ],
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "No cars available",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
                         Center(
                           child: TextButton(
                             onPressed: () {},

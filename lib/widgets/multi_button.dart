@@ -12,6 +12,7 @@ class MultiButton extends StatelessWidget {
     this.activeColor,
     this.textStyle,
     this.activeTextStyle,
+    this.enabled = true,
   });
 
   final List<MultiButtonAction> actions;
@@ -22,11 +23,14 @@ class MultiButton extends StatelessWidget {
   final Color? activeColor;
   final TextStyle? textStyle;
   final TextStyle? activeTextStyle;
+  final bool enabled;
 
   void _handleOnTap(MultiButtonAction action) {
-    onTap(actions.indexOf(action));
+    if (enabled) {
+      onTap(actions.indexOf(action));
 
-    action.action();
+      action.action();
+    }
   }
 
   @override

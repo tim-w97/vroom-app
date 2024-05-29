@@ -29,15 +29,18 @@ ThemeData getLightTheme() {
     floatingActionButtonTheme: FloatingActionButtonThemeData(
         foregroundColor: theme.colorScheme.onPrimary,
         backgroundColor: theme.colorScheme.primary,
-        shape: const CircleBorder()
-    ),
+        shape: const CircleBorder()),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: theme.colorScheme.surface,
         border: UnderlineInputBorder(
-          borderSide: BorderSide(color: theme.colorScheme.outlineVariant),
+          borderSide:
+              BorderSide(color: theme.colorScheme.outlineVariant, width: 1),
         ),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: theme.colorScheme.outline, width: 2),
+        ),
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.outline, width: 1),
         ),
         /*enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
