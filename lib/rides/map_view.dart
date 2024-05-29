@@ -36,9 +36,76 @@ class MapView extends StatelessWidget {
         DraggableScrollableSheet(
             builder:
                 (BuildContext context, ScrollController scrollController) {
-                return Placeholder(); //TODO Insert form here
-                })
+              return Placeholder(); //TODO Insert form here
+            })
       ],
+    );
+  }
+}
+
+/*class DraggableScrollableNavSheet extends StatefulWidget {
+  const DraggableScrollableNavSheet({super.key});
+
+  @override
+  State<DraggableScrollableNavSheet> createState() =>
+      _DraggableScrollableNavSheetState();
+}
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+        builder: (BuildContext context, ScrollController scrollController) {
+      return ColoredBox(
+          color: Colors.black12.withOpacity(0.3),
+          child: Column(
+            children: [Grabber(onVerticalDragUpdate: (DragUpdateDetails details) {
+              /*setState(() {
+                _sheetPosition -= details.delta.dy / _dragSensitivity;
+                if (_sheetPosition < 0.25) {
+                  _sheetPosition = 0.25;
+                }
+                if (_sheetPosition > 1.0) {
+                  _sheetPosition = 1.0;
+                }
+              })*/
+            },)],
+          ));
+    });
+  }
+}*/
+
+class Grabber extends StatelessWidget {
+  const Grabber({
+    super.key,
+    required this.onVerticalDragUpdate,
+  });
+
+  final ValueChanged<DragUpdateDetails> onVerticalDragUpdate;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme
+        .of(context)
+        .colorScheme;
+
+    return GestureDetector(
+      onVerticalDragUpdate: onVerticalDragUpdate,
+      child: Container(
+        width: double.infinity,
+        color: colorScheme.onSurface,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
+            width: 32.0,
+            height: 4.0,
+            decoration: BoxDecoration(
+              color: Colors.black12,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
