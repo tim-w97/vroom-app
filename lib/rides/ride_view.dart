@@ -11,7 +11,7 @@ class RideView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RideVM(),
       child: Consumer<RideVM>(builder: (context, vm, child) {
-        return Center(
+        return const Center(
           child: const CarView()
         );
       }),

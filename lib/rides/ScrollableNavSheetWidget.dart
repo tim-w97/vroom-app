@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vroom_campus_app/rides/ride_vm.dart';
 
 class DraggableScrollableNavSheet extends StatefulWidget {
-  const DraggableScrollableNavSheet({super.key});
+  //final RideVM vm;
+  const DraggableScrollableNavSheet({super.key, /*required this.vm*/});
 
   @override
   State<DraggableScrollableNavSheet> createState() =>
@@ -18,45 +21,54 @@ class _DraggableScrollableNavSheetState
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-
         initialChildSize: _sheetPosition,
         builder: (BuildContext context, ScrollController scrollController) {
           return ClipRect(
               child: ColoredBox(
-                color: Colors.grey.shade900.withOpacity(0.75),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 10,
-                    sigmaY: 10
+            color: Colors.grey.shade900.withOpacity(0.75),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Column(
+                children: [
+                  Grabber(
+                    onVerticalDragUpdate: (DragUpdateDetails details) {
+                      setState(() {
+                        _sheetPosition -= details.delta.dy / _dragSensitivity;
+                        if (_sheetPosition < 0.25) {
+                          _sheetPosition = 0.25;
+                        }
+                        if (_sheetPosition > 1.0) {
+                          _sheetPosition = 1.0;
+                        }
+                      });
+                    },
                   ),
-                  child: Column(
-                    children: [
-                      Grabber(
-                        onVerticalDragUpdate: (DragUpdateDetails details) {
-                          setState(() {
-                            _sheetPosition -= details.delta.dy / _dragSensitivity;
-                            if (_sheetPosition < 0.25) {
-                              _sheetPosition = 0.25;
-                            }
-                            if (_sheetPosition > 1.0) {
-                              _sheetPosition = 1.0;
-                            }
-                          });
-                        },
-                      ),
-                      const Flexible(
+                  /*Consumer<RideVM>(
+                    builder: (context, vm, child) {
+                      return*/ const Flexible(
                           child: Center(
-                            child: Column(
-                              children: [
-                                Text("Todo"),
-                                Text("Todo")
-                              ],),)
-                      )
-                    ],
-                  ),
-                ),
-              ));
-        });
+                        child: Column(
+                          children: [
+                            TextField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Start"),
+                            ),
+                            TextField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "End"),
+                            ),
+                          ],
+                        ),
+                      )/*);
+                    },*/
+                  )
+                ],
+              ),
+            ),
+          ),);
+        },);
   }
 }
 
@@ -70,7 +82,6 @@ class Grabber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onVerticalDragUpdate: onVerticalDragUpdate,
       child: Container(
