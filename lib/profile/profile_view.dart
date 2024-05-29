@@ -59,16 +59,25 @@ class ProfileView extends StatelessWidget {
                                     TextFormField(
                                       decoration: InputDecoration(
                                           hintText: "Name".tr()),
+                                      onChanged: (value) {
+                                        vm.setName(value);
+                                      },
                                     ),
                                     const SizedBox(height: 8),
                                     TextFormField(
                                       decoration: InputDecoration(
                                           hintText: "Surname".tr()),
+                                      onChanged: (value) {
+                                        vm.setSurName(value);
+                                      },
                                     ),
                                     const SizedBox(height: 8),
                                     TextFormField(
                                       decoration: InputDecoration(
                                           hintText: "E-mail".tr()),
+                                      onChanged: (value) {
+                                        vm.setEMail(value);
+                                      },
                                     ),
                                   ],
                                 ),

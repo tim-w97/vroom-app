@@ -7,11 +7,32 @@ import '../model/multi_button_action.dart';
 class ProfileVM with ChangeNotifier {
   
   int _currentIndex = 0;
+  String _name = "";
+  String _surName = "";
+  String _email = "";
 
   int get currentIndex => _currentIndex;
+  String get name => _name;
+  String get surName => _surName;
+  String get email => _email;
 
   void setIndex(int index) {
     _currentIndex = index;
+    notifyListeners();
+  }
+
+  void setName(String name) {
+    _name = name;
+    notifyListeners();
+  }
+
+  void setSurName(String surName) {
+    _surName = surName;
+    notifyListeners();
+  }
+
+  void setEMail(String email) {
+    _email = email;
     notifyListeners();
   }
 
