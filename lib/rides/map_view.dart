@@ -34,16 +34,15 @@ class MapView extends StatelessWidget {
           ),
         ),
         DraggableScrollableSheet(
-            builder:
-                (BuildContext context, ScrollController scrollController) {
-              return Placeholder(); //TODO Insert form here
-            })
+            builder: (BuildContext context, ScrollController scrollController) {
+          return const DraggableScrollableNavSheet(); //TODO Insert form here
+        })
       ],
     );
   }
 }
 
-/*class DraggableScrollableNavSheet extends StatefulWidget {
+class DraggableScrollableNavSheet extends StatefulWidget {
   const DraggableScrollableNavSheet({super.key});
 
   @override
@@ -51,28 +50,46 @@ class MapView extends StatelessWidget {
       _DraggableScrollableNavSheetState();
 }
 
+class _DraggableScrollableNavSheetState
+    extends State<DraggableScrollableNavSheet> {
+  double _sheetPosition = 0.5;
+  final double _dragSensitivity = 600;
+
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
+        initialChildSize: _sheetPosition,
         builder: (BuildContext context, ScrollController scrollController) {
-      return ColoredBox(
-          color: Colors.black12.withOpacity(0.3),
-          child: Column(
-            children: [Grabber(onVerticalDragUpdate: (DragUpdateDetails details) {
-              /*setState(() {
-                _sheetPosition -= details.delta.dy / _dragSensitivity;
-                if (_sheetPosition < 0.25) {
-                  _sheetPosition = 0.25;
-                }
-                if (_sheetPosition > 1.0) {
-                  _sheetPosition = 1.0;
-                }
-              })*/
-            },)],
-          ));
-    });
+          return ColoredBox(
+              color: Colors.black12.withOpacity(0.3),
+              child: Column(
+                children: [
+                  Grabber(
+                    onVerticalDragUpdate: (DragUpdateDetails details) {
+                      setState(() {
+                        _sheetPosition -= details.delta.dy / _dragSensitivity;
+                        if (_sheetPosition < 0.25) {
+                          _sheetPosition = 0.25;
+                        }
+                        if (_sheetPosition > 1.0) {
+                          _sheetPosition = 1.0;
+                        }
+                      });
+                    },
+                  ),
+                 const Flexible(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Text("Todo"),
+                            Text("Todo")
+                          ],),)
+                  )
+                ],
+              ));
+        });
   }
-}*/
+}
 
 class Grabber extends StatelessWidget {
   const Grabber({
@@ -84,9 +101,7 @@ class Grabber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme
-        .of(context)
-        .colorScheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return GestureDetector(
       onVerticalDragUpdate: onVerticalDragUpdate,
