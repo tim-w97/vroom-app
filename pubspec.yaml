@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.2.1
   open_route_service: ^1.2.6
   flutter_map: ^6.1.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +60,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - .env
     - lib/assets/intl/
     - lib/assets/images/
 

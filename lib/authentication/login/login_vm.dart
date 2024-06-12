@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -6,6 +7,7 @@ class LoginVM extends ChangeNotifier {
   String _username = "";
   String _password = "";
   String decodedString = "";
+  String API_URL = dotenv.env['API_URL'] ?? "";
 
   void setUsername(String username) {
     _username = username;
@@ -21,7 +23,7 @@ class LoginVM extends ChangeNotifier {
     final String basicAuth = 'Basic ' + base64Encode(utf8.encode('$_username:$_password'));
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:8080/login'),
+      Uri.parse('$API_URL/login'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'authorization': basicAuth,

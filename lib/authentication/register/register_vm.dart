@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -7,6 +8,7 @@ class RegisterVM extends ChangeNotifier {
   String _password = "";
   String _email = "";
   bool _passwordIsValid = false;
+  String API_URL = dotenv.env['API_URL'] ?? "";
 
   String get username => _username;
   void setUsername(String username) {
@@ -34,7 +36,7 @@ class RegisterVM extends ChangeNotifier {
 
   Future<void> register() async {
     final response = await http.post(
-      Uri.parse('http://10.0.2.2:8080/register'),
+      Uri.parse('$API_URL/register'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
