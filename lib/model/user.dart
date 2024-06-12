@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'car.dart';
 import 'gender.dart';
 
 class User {
@@ -17,6 +18,7 @@ class User {
   Image? image; //TODO Default picture when null
   List<String>? favoriteDrivers;
   List<String>? rememberedRides;
+  List<Car>? cars;
 
   User ({
     required this.firstName,
@@ -30,6 +32,7 @@ class User {
     this.image,
     this.favoriteDrivers,
     this.rememberedRides,
+    this.cars,
   });
 
 }
