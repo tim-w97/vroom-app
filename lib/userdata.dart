@@ -12,9 +12,9 @@ class UserDataModel {
       cars: [Car(licensePlate: "HOF 420", model: "BMW", color: "Gray", imageURL: "NONE")]);
   
   UserDataModel._privateConstructor();
-  static UserDataModel sharedinstance = UserDataModel._privateConstructor();
+  static UserDataModel sharedInstance = UserDataModel._privateConstructor();
 
   static UserDataModel init() {
-    return sharedinstance;
+    return sharedInstance;
   }
 }
