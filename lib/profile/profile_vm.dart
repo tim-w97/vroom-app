@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:vroom_campus_app/model/user.dart';
 import 'package:vroom_campus_app/userdata.dart';
 
 import '../model/car.dart';
@@ -6,18 +7,15 @@ import '../model/gender.dart';
 import '../model/multi_button_action.dart';
 
 class ProfileVM with ChangeNotifier {
+  final UserDataModel _userDataModel = UserDataModel.sharedInstance;
   int _currentIndex = 0;
   bool _isEditing = false;
   bool _isEditingCars = false;
-  final List<Car> _cars = UserDataModel.sharedInstance.userContainer.cars!;
-
+  User _user = User(firstName: "firstName", surName: "", email: "", password: "");
   late List<MultiButtonAction> genderSelect;
-  String _name = "";
-  String _surName = "";
-  String _email = "";
-  Gender _gender = Gender.female;
 
   ProfileVM() {
+    _user = _userDataModel.userContainer;
     genderSelect = [
       MultiButtonAction(name: "W", action: () {
         _setGender(Gender.female);
@@ -32,10 +30,10 @@ class ProfileVM with ChangeNotifier {
   int get currentIndex => _currentIndex;
   bool get isEditing => _isEditing;
   bool get isEditingCars => _isEditingCars;
-  String get name => _name;
-  String get surName => _surName;
-  String get email => _email;
-  Gender get gender => _gender;
+  String get name => _user.firstName;
+  String get surName => _user.surName;
+  String get email => _user.email;
+  Gender get gender => _user.gender ?? Gender.diverse;
 
   void setIndex(int index) {
     _currentIndex = index;
@@ -53,32 +51,32 @@ class ProfileVM with ChangeNotifier {
   }
 
   void setName(String name) {
-    _name = name;
+    _user.firstName = name;
     notifyListeners();
   }
 
   void setSurName(String surName) {
-    _surName = surName;
+    _user.surName = surName;
     notifyListeners();
   }
 
   void setEMail(String email) {
-    _email = email;
+    _user.email = email;
     notifyListeners();
   }
 
   void _setGender(Gender gender) {
-    _gender = gender;
+    _user.gender = gender;
     notifyListeners();
   }
 
   MultiButtonAction get currentGender => genderSelect[_currentIndex];
 
 
-  get cars => _cars;
+  get cars => _user.cars;
 
   void removeCar(Car car) {
-    _cars.remove(car);
+    _user.cars!.remove(car);
     notifyListeners();
   }
 }

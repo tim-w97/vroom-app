@@ -74,7 +74,7 @@ class _ProfileView extends State<ProfileView> {
                                     TextFormField(
                                       enabled: vm.isEditing,
                                       decoration: InputDecoration(
-                                          hintText: "Name".tr()),
+                                          hintText: vm.name ?? "Name".tr()),
                                       onChanged: (value) {
                                         vm.setName(value);
                                       },
@@ -83,7 +83,7 @@ class _ProfileView extends State<ProfileView> {
                                     TextFormField(
                                       enabled: vm.isEditing,
                                       decoration: InputDecoration(
-                                          hintText: "Surname".tr()),
+                                          hintText: vm.surName ?? "Surname".tr()),
                                       onChanged: (value) {
                                         vm.setSurName(value);
                                       },
@@ -92,7 +92,7 @@ class _ProfileView extends State<ProfileView> {
                                     TextFormField(
                                       enabled: vm.isEditing,
                                       decoration: InputDecoration(
-                                          hintText: "E-mail".tr()),
+                                          hintText: vm.email ?? "E-mail".tr()),
                                       onChanged: (value) {
                                         vm.setEMail(value);
                                       },
