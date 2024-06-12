@@ -153,7 +153,7 @@ class _ProfileView extends State<ProfileView> {
                                       .toList(),
                                 ),
                               )
-                            : Row(
+                            :const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
