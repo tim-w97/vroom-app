@@ -9,8 +9,15 @@ class NetworkHelper {
   final String API_URL = dotenv.env['API_URL'] ?? "";
   late final SharedPreferences prefs;
 
-  Future<void> login(String username, String password) async {
+  NetworkHelper() {
+    _init();
+  }
+
+  _init() async {
     prefs = await SharedPreferences.getInstance();
+  }
+
+  Future<void> login(String username, String password) async {
     final String basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
 
     final response = await http.post(
@@ -24,6 +31,23 @@ class NetworkHelper {
     if (response.statusCode == 200) {
       prefs.setString(SharedPreferencesKeys.base64Authentication.toString(), basicAuth);
       final responseJson = jsonDecode(response.body);
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future<void> getUser() async {
+    final String basicAuth = '${prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!}';
+    final response = await http.get(
+      Uri.parse('$API_URL/user'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'authorization': basicAuth,
+      },
+    );
+    if (response.statusCode == 200) {
+      print(response.body);
+      Map<String,dynamic> jsonMap = jsonDecode(response.body);
     } else {
       print(response.statusCode);
     }
