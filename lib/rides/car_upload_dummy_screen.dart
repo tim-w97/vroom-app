@@ -5,11 +5,21 @@ class CarUploadDummyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void uploadImage() {
+      print('Uploading image to server ...');
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Test - Bild von Auto hochladen'),
+      floatingActionButton: FloatingActionButton.large(
+        onPressed: uploadImage,
+        child: const Icon(Icons.camera_alt),
       ),
-      body: ,
+      appBar: AppBar(
+        title: const Text('Bildupload-Test'),
+      ),
+      body: const Center(
+        child: Text('Lade ein Bild hoch'),
+      ),
     );
   }
 }

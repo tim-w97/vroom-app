@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vroom_campus_app/rides/car_upload_dummy_screen.dart';
 import 'package:vroom_campus_app/rides/map_view.dart';
 import 'package:vroom_campus_app/rides/ride_vm.dart';
 
@@ -21,7 +22,11 @@ class CarView extends StatelessWidget {
                 const Padding(padding: EdgeInsets.all(10)),
                 ElevatedButton(
                     onPressed: () {
-                      print("+");
+                      final route = MaterialPageRoute(
+                        builder: (context) => const CarUploadDummyScreen(),
+                      );
+
+                      Navigator.of(context).push(route);
                     },
                     child: const Text("+ Neues Fahrzeug")),
                 Consumer<RideVM>(builder: (context,vm,child) {
