@@ -4,7 +4,11 @@ import 'package:flutter/cupertino.dart';
 class CarVM extends ChangeNotifier {
   CameraController? controller;
 
-  Future<void> initCamera() async {
+  CarVM() {
+    _initCamera();
+  }
+
+  Future<void> _initCamera() async {
     final cameras = await availableCameras();
 
     if (cameras.isEmpty) {

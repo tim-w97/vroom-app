@@ -9,7 +9,6 @@ class CarUploadDummyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vm = context.watch<CarVM>();
-    vm.initCamera();
 
     Widget buildCameraPreview() {
       final controller = vm.controller;
