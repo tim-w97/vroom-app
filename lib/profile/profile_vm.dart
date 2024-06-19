@@ -1,21 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:vroom_campus_app/model/user.dart';
-import 'package:vroom_campus_app/userdata.dart';
 
 import '../model/car.dart';
 import '../model/gender.dart';
 import '../model/multi_button_action.dart';
 
 class ProfileVM with ChangeNotifier {
-  final UserDataModel _userDataModel = UserDataModel.sharedInstance;
+  //final UserDataModel _userDataModel = UserDataModel.sharedInstance;
   int _currentIndex = 0;
   bool _isEditing = false;
   bool _isEditingCars = false;
-  User _user = User(firstName: "firstName", surName: "", email: "", password: "");
+  final User _user = User(firstName: "firstName", surName: "", email: "", password: "");
   late List<MultiButtonAction> genderSelect;
 
   ProfileVM() {
-    _user = _userDataModel.userContainer;
+    //_user = _userDataModel.userContainer;
     genderSelect = [
       MultiButtonAction(name: "W", action: () {
         _setGender(Gender.female);
@@ -73,7 +72,7 @@ class ProfileVM with ChangeNotifier {
   MultiButtonAction get currentGender => genderSelect[_currentIndex];
 
 
-  get cars => _user.cars;
+  get cars => _user.cars ?? [];
 
   void removeCar(Car car) {
     _user.cars!.remove(car);
