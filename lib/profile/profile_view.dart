@@ -125,8 +125,8 @@ class _ProfileView extends State<ProfileView> {
                           ],
                         ),
                         const SizedBox(height: 8),
-                        vm.cars.isNotEmpty
-                            ? Container(
+                        vm.cars.isNotEmpty ?
+                             Container(
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
                                   color: colorScheme.onSecondaryContainer,

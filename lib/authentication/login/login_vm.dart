@@ -3,8 +3,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../../model/user.dart';
-import '../../userdata.dart';
 
 class LoginVM extends ChangeNotifier {
   String _username = "";
@@ -59,7 +57,8 @@ class LoginVM extends ChangeNotifier {
     if (response.statusCode == 200) {
       print(response.statusCode);
       Map<String,dynamic> jsonMap = jsonDecode(response.body);
-      UserDataModel.sharedInstance.userContainer.surName = jsonMap['firstName'];
+      //UserDataModel.sharedInstance.userContainer.surName = jsonMap['firstName'];
+      _username = jsonMap['firstName'];
       notifyListeners();
     } else {
       print(response.statusCode);
