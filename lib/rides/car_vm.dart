@@ -51,7 +51,7 @@ class CarVM extends ChangeNotifier {
       throw 'Api URL is null, do you added it to .env?';
     }
 
-    final carImageUrl = Uri.parse('$apiUrl/car-image');
+    final carImageUrl = Uri.parse('$apiUrl/cars/image');
 
     final request = http.MultipartRequest('POST', carImageUrl);
 
