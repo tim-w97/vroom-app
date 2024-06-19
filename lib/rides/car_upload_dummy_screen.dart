@@ -11,15 +11,13 @@ class CarUploadDummyScreen extends StatelessWidget {
     final vm = context.watch<CarVM>();
 
     Widget buildCameraPreview() {
-      final controller = vm.controller;
-
-      if (controller == null) {
+      if (vm.isLoading) {
         return const Center(
           child: CircularProgressIndicator(),
         );
       }
 
-      return CameraPreview(controller);
+      return CameraPreview(vm.controller);
     }
 
     return Scaffold(

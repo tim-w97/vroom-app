@@ -2,13 +2,21 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 
 class CarVM extends ChangeNotifier {
-  CameraController? controller;
+  late CameraController controller;
+  bool isLoading = true;
 
   CarVM() {
     _initCamera();
   }
 
+  void _setIsLoading(bool newValue) {
+    isLoading = newValue;
+    notifyListeners();
+  }
+
   Future<void> _initCamera() async {
+    _setIsLoading(true);
+
     final cameras = await availableCameras();
 
     if (cameras.isEmpty) {
@@ -18,18 +26,23 @@ class CarVM extends ChangeNotifier {
     // use back camera if there are two cameras
     final camera = cameras.length > 1 ? cameras[1] : cameras[0];
 
-    final controller = CameraController(
+    controller = CameraController(
       camera,
       ResolutionPreset.medium,
     );
 
     await controller.initialize();
 
-    this.controller = controller;
-    notifyListeners();
+    _setIsLoading(false);
   }
 
   Future<void> uploadImage() async {
+    _setIsLoading(true);
 
+    final file = await controller.takePicture();
+
+    print(file.name);
+
+    _setIsLoading(false);
   }
 }
