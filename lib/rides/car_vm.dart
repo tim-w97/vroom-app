@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CarVM extends ChangeNotifier {
   late CameraController controller;
@@ -43,7 +46,7 @@ class CarVM extends ChangeNotifier {
 
     final imageFile = await controller.takePicture();
 
-    // TODO: move the following to the "NetworkClerk"
+    // TODO: move the following to the "NetworkClerk", ask Nik for help :P
 
     final apiUrl = dotenv.env['API_URL'];
 
@@ -53,7 +56,20 @@ class CarVM extends ChangeNotifier {
 
     final carImageUrl = Uri.parse('$apiUrl/cars/image');
 
+    // TODO: use Base64 encoded credentials from shared preferences
+    const username = 'tim@test.de';
+    const password = 'tim123';
+
+    final base64EncodedCredentials = base64UrlEncode(
+      utf8.encode('$username:$password'),
+    );
+
+    String basicAuthHeader = 'Basic $base64EncodedCredentials';
+
+    Map<String, String> headers = { "Authorization": basicAuthHeader};
+
     final request = http.MultipartRequest('POST', carImageUrl);
+    request.headers.addAll(headers);
 
     final multipartFile = await http.MultipartFile.fromPath(
       'imageFile',
