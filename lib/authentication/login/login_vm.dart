@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vroom_campus_app/userdefaults/keys.dart';
 import 'dart:convert';
+
+
 
 
 class LoginVM extends ChangeNotifier {
@@ -9,6 +13,7 @@ class LoginVM extends ChangeNotifier {
   String _password = "";
   String decodedString = "";
   String API_URL = dotenv.env['API_URL'] ?? "";
+  late SharedPreferences prefs;
 
   void setUsername(String username) {
     _username = username;
@@ -21,6 +26,7 @@ class LoginVM extends ChangeNotifier {
   }
 
   Future<void> login() async {
+    prefs = await SharedPreferences.getInstance();
     final String basicAuth = 'Basic ' + base64Encode(utf8.encode('$_username:$_password'));
 
     final response = await http.post(
@@ -32,9 +38,9 @@ class LoginVM extends ChangeNotifier {
     );
 
     if (response.statusCode == 200) {
+      prefs.setString(SharedPreferencesKeys.base64Authentication.toString(), basicAuth);
       final responseJson = jsonDecode(response.body);
-      print(response.statusCode);
-      print("Login successfull");
+
       notifyListeners();
     } else {
       print(response.statusCode);
