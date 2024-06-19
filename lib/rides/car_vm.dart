@@ -1,5 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 
 class CarVM extends ChangeNotifier {
   late CameraController controller;
@@ -36,13 +38,33 @@ class CarVM extends ChangeNotifier {
     _setIsLoading(false);
   }
 
-  Future<void> uploadImage() async {
+  Future<bool> uploadImage() async {
     _setIsLoading(true);
 
-    final file = await controller.takePicture();
+    final imageFile = await controller.takePicture();
 
-    print(file.name);
+    // TODO: move the following to the "NetworkClerk"
+
+    final apiUrl = dotenv.env['API_URL'];
+
+    if (apiUrl == null) {
+      throw 'Api URL is null, do you added it to .env?';
+    }
+
+    final carImageUrl = Uri.parse('$apiUrl/car-image');
+
+    final request = http.MultipartRequest('POST', carImageUrl);
+
+    final multipartFile = await http.MultipartFile.fromPath(
+      'imageFile',
+      imageFile.path,
+    );
+
+    request.files.add(multipartFile);
+
+    final response = await request.send();
 
     _setIsLoading(false);
+    return response.statusCode == 200;
   }
 }

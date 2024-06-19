@@ -20,9 +20,30 @@ class CarUploadDummyScreen extends StatelessWidget {
       return CameraPreview(vm.controller);
     }
 
+    Future<void> uploadImage() async {
+      String message = 'Hochladen fehlgeschlagen';
+
+      final uploadSuccessful = await vm.uploadImage();
+
+      if (uploadSuccessful) {
+        message = 'Bild wurde erfolgreich hochgeladen';
+      }
+
+      if (!context.mounted) {
+        throw "Context isn't mounted, can't show dialog";
+      }
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Text(message),
+        ),
+      );
+    }
+
     return Scaffold(
       floatingActionButton: FloatingActionButton.large(
-        onPressed: vm.uploadImage,
+        onPressed: uploadImage,
         child: const Icon(Icons.camera_alt),
       ),
       appBar: AppBar(
