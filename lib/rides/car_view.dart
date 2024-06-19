@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/rides/car_upload_dummy_screen.dart';
+import 'package:vroom_campus_app/rides/car_vm.dart';
 import 'package:vroom_campus_app/rides/map_view.dart';
 import 'package:vroom_campus_app/rides/ride_vm.dart';
 
@@ -23,7 +24,12 @@ class CarView extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       final route = MaterialPageRoute(
-                        builder: (context) => const CarUploadDummyScreen(),
+                        builder: (context) => ChangeNotifierProvider<CarVM>(
+                          create: (context) => CarVM(),
+                          builder: (context, child) {
+                            return const CarUploadDummyScreen();
+                          }
+                        ),
                       );
 
                       Navigator.of(context).push(route);
