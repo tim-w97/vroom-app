@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -12,10 +13,10 @@ class NetworkHelper {
   late final SharedPreferences prefs;
 
   NetworkHelper() {
-    _init();
+
   }
 
-  _init() async {
+  _init() async { //TODO Loading or nullable
     prefs = await SharedPreferences.getInstance();
   }
 
@@ -38,7 +39,9 @@ class NetworkHelper {
     }
   }
 
-  Future<void> getUser() async {
+  Future<User> getUser() async {
+    prefs = await SharedPreferences.getInstance();
+    print("called");
     final String basicAuth = '${prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!}';
     final response = await http.get(
       Uri.parse('$API_URL/user'),
@@ -49,11 +52,12 @@ class NetworkHelper {
     );
     if (response.statusCode == 200) {
       print(response.body);
-      Map<User,dynamic> jsonMap = jsonDecode(response.body);
+      return User.fromJson(jsonDecode(response.body));
       //final User user = jsonMap;
 
     } else {
       print(response.statusCode);
+      return User(firstName: "", lastName: "", email: "", password: "");
     }
   }
 

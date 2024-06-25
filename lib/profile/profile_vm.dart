@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:vroom_campus_app/model/user.dart';
+import 'package:vroom_campus_app/network_helper.dart';
 
 import '../model/car.dart';
 import '../model/gender.dart';
@@ -10,11 +11,13 @@ class ProfileVM with ChangeNotifier {
   int _currentIndex = 0;
   bool _isEditing = false;
   bool _isEditingCars = false;
-  final User _user = User(firstName: "firstName", surName: "", email: "", password: "");
+  User _user = User(firstName: "", lastName: "", email: "", password: "");
+  NetworkHelper networkHelper = NetworkHelper();
   late List<MultiButtonAction> genderSelect;
 
   ProfileVM() {
     //_user = _userDataModel.userContainer;
+    fetchUser();
     genderSelect = [
       MultiButtonAction(name: "W", action: () {
         _setGender(Gender.female);
@@ -30,7 +33,7 @@ class ProfileVM with ChangeNotifier {
   bool get isEditing => _isEditing;
   bool get isEditingCars => _isEditingCars;
   String get name => _user.firstName;
-  String get surName => _user.surName;
+  String get surName => _user.lastName;
   String get email => _user.email;
   Gender get gender => _user.gender ?? Gender.diverse;
 
@@ -55,7 +58,7 @@ class ProfileVM with ChangeNotifier {
   }
 
   void setSurName(String surName) {
-    _user.surName = surName;
+    _user.lastName = surName;
     notifyListeners();
   }
 
@@ -66,6 +69,16 @@ class ProfileVM with ChangeNotifier {
 
   void _setGender(Gender gender) {
     _user.gender = gender;
+    notifyListeners();
+  }
+
+  void _setUser(User user) {
+    _user = user;
+    notifyListeners();
+  }
+
+  void fetchUser() async {
+    _setUser(await networkHelper.getUser());
     notifyListeners();
   }
 

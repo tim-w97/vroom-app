@@ -6,12 +6,12 @@ class Car {
   String licensePlate;
   String model;
   String color;
-  String imageURL; //ImageWidget nimmt String entgegen
+  String? image;
   Car(
       {required this.licensePlate,
       required this.model,
       required this.color,
-      required this.imageURL});
+      required this.image});
 
   factory Car.fromJson(Map<String, dynamic> json) => _$CarFromJson(json);
 

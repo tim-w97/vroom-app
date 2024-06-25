@@ -8,7 +8,7 @@ import '../model/car.dart';
 class RideVM extends ChangeNotifier {
   OpenRouteService openRouteService =
       OpenRouteService(apiKey: dotenv.env['API_KEY'] ?? "");
-  User currentUser = User(firstName: "", surName: "", email: "", password: "");
+  User currentUser = User(firstName: "", lastName: "", email: "", password: "");
   List<Car> cars = [];
 
   void removeCar(Car car) {

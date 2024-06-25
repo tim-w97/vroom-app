@@ -10,7 +10,7 @@ part 'user.g.dart';
 class User {
 
   String firstName = "";
-  String surName = "";
+  String lastName = "";
   String email = "";
   String password = "";
 
@@ -26,7 +26,7 @@ class User {
 
   User ({
     required this.firstName,
-    required this.surName,
+    required this.lastName,
     required this.email,
     required this.password,
     this.phoneNumber,
