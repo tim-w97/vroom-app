@@ -23,5 +23,7 @@
   "missingEnvVar": "Die Umgebungsvariable {} ist nicht gesetzt",
   "cantConnectToBackend": "Die Verbindung zum Backend kann nicht hergestellt werden",
   "unknownErrorOccurred": "Ein unbekannter Fehler ist aufgetreten",
-  "backendRespondedWithStatus": "Das Backend hat mit dem Status {} geantwortet"
+  "backendRespondedWithStatus": "Das Backend hat mit dem Status {} geantwortet",
+  "operationSuccessful": "Operation erfolgreich",
+  "imageUploadedSuccessfully": "Das Bild wurde hochgeladen"
 }

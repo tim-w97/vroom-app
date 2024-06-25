@@ -57,6 +57,20 @@ class CarUploadScreen extends StatelessWidget {
           ),
         );
       }
+
+      if (!context.mounted) {
+        throw "Context isn't mounted";
+      }
+
+      if (status == Status.success) {
+        showDialog(
+          context: context,
+          builder: (context) => CloseableAlert(
+            title: 'operationSuccessful'.tr(),
+            content: 'imageUploadedSuccessfully'.tr(),
+          ),
+        );
+      }
     }
 
     return Scaffold(

@@ -23,5 +23,7 @@
   "missingEnvVar": "The environment variable {} is not set",
   "cantConnectToBackend": "Can't connect to the backend",
   "unknownErrorOccurred": "An unknown error occurred",
-  "backendRespondedWithStatus": "The backend responded with status {}"
+  "backendRespondedWithStatus": "The backend responded with status {}",
+  "operationSuccessful": "Operation successful",
+  "imageUploadedSuccessfully": "The image was uploaded successfully"
 }
