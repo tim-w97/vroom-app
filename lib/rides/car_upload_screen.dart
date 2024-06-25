@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/rides/car_vm.dart';
 import 'package:vroom_campus_app/widgets/closeable_alert.dart';
 
-class CarUploadDummyScreen extends StatelessWidget {
-  const CarUploadDummyScreen({super.key});
+class CarUploadScreen extends StatelessWidget {
+  const CarUploadScreen({super.key});
 
   Widget buildProgressIndicator({required String text}) {
     return Center(
