@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:vroom_campus_app/userdefaults/keys.dart';
 
+import 'model/user.dart';
+
 class NetworkHelper {
   final String API_URL = dotenv.env['API_URL'] ?? "";
   late final SharedPreferences prefs;
@@ -47,7 +49,9 @@ class NetworkHelper {
     );
     if (response.statusCode == 200) {
       print(response.body);
-      Map<String,dynamic> jsonMap = jsonDecode(response.body);
+      Map<User,dynamic> jsonMap = jsonDecode(response.body);
+      //final User user = jsonMap;
+
     } else {
       print(response.statusCode);
     }
