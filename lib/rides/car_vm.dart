@@ -1,30 +1,42 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+
+enum Status {
+  idle,
+  isInitializingCamera,
+  isUploading,
+  error,
+  success,
+}
 
 class CarVM extends ChangeNotifier {
+  var status = Status.idle;
+  String? error;
+
   late CameraController controller;
-  bool isLoading = true;
 
   CarVM() {
     _initCamera();
   }
 
-  void _setIsLoading(bool newValue) {
-    isLoading = newValue;
+  void setStatusAndNotify(Status status) {
+    this.status = status;
     notifyListeners();
   }
 
   Future<void> _initCamera() async {
-    _setIsLoading(true);
+    setStatusAndNotify(Status.isInitializingCamera);
 
     final cameras = await availableCameras();
 
     if (cameras.isEmpty) {
+      setStatusAndNotify(Status.error);
       throw 'This device has no cameras';
     }
 
@@ -37,12 +49,11 @@ class CarVM extends ChangeNotifier {
     );
 
     await controller.initialize();
-
-    _setIsLoading(false);
+    setStatusAndNotify(Status.idle);
   }
 
-  Future<bool> uploadImage() async {
-    _setIsLoading(true);
+  Future<void> uploadImage() async {
+    setStatusAndNotify(Status.isUploading);
 
     final imageFile = await controller.takePicture();
 
@@ -51,6 +62,7 @@ class CarVM extends ChangeNotifier {
     final apiUrl = dotenv.env['API_URL'];
 
     if (apiUrl == null) {
+      setStatusAndNotify(Status.error);
       throw 'Api URL is null, do you added it to .env?';
     }
 
@@ -66,7 +78,7 @@ class CarVM extends ChangeNotifier {
 
     String basicAuthHeader = 'Basic $base64EncodedCredentials';
 
-    Map<String, String> headers = { "Authorization": basicAuthHeader};
+    Map<String, String> headers = {"Authorization": basicAuthHeader};
 
     final request = http.MultipartRequest('POST', carImageUrl);
     request.headers.addAll(headers);
@@ -78,9 +90,25 @@ class CarVM extends ChangeNotifier {
 
     request.files.add(multipartFile);
 
-    final response = await request.send();
+    http.StreamedResponse? response;
 
-    _setIsLoading(false);
-    return response.statusCode == 200;
+    try {
+      response = await request.send();
+    } on SocketException catch (exception) {
+      log(exception.message);
+      throw 'Backend ist nicht aktiv';
+    } catch (exception) {
+      log(exception.toString());
+      throw 'Unbekannter Fehler';
+    } finally {
+      setStatusAndNotify(Status.error);
+    }
+
+    if (response.statusCode != 201) {
+      setStatusAndNotify(Status.error);
+      throw 'Server hat mit Status-Code ${response.statusCode} geantwortet';
+    }
+
+    setStatusAndNotify(Status.success);
   }
 }

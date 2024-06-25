@@ -2,43 +2,60 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/rides/car_vm.dart';
+import 'package:vroom_campus_app/widgets/closeable_alert.dart';
 
 class CarUploadDummyScreen extends StatelessWidget {
   const CarUploadDummyScreen({super.key});
 
+  Widget buildProgressIndicator({required String text}) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const CircularProgressIndicator(),
+          const SizedBox(height: 20),
+          Text(
+            text,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final vm = context.watch<CarVM>();
+    final vm = context.read<CarVM>();
+    final status = context.select<CarVM, Status>((vm) => vm.status);
 
     Widget buildCameraPreview() {
-      if (vm.isLoading) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
+      if (status == Status.isInitializingCamera) {
+        return buildProgressIndicator(text: 'Kamera wird initialisiert');
+      }
+
+      if (status == Status.isUploading) {
+        return buildProgressIndicator(text: 'Bild wird hochgeladen');
       }
 
       return CameraPreview(vm.controller);
     }
 
     Future<void> uploadImage() async {
-      String message = 'Hochladen fehlgeschlagen';
+      try {
+        await vm.uploadImage();
+      } on String catch (error) {
+        if (!context.mounted) {
+          throw "Context isn't mounted";
+        }
 
-      final uploadSuccessful = await vm.uploadImage();
-
-      if (uploadSuccessful) {
-        message = 'Bild wurde erfolgreich hochgeladen';
+        showDialog(
+          context: context,
+          builder: (context) => CloseableAlert(
+            title: 'Fehler',
+            content: error,
+          ),
+        );
       }
-
-      if (!context.mounted) {
-        throw "Context isn't mounted, can't show dialog";
-      }
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          content: Text(message),
-        ),
-      );
     }
 
     return Scaffold(
