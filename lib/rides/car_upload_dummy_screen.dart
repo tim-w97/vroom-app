@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vroom_campus_app/rides/car_vm.dart';
@@ -30,11 +31,11 @@ class CarUploadDummyScreen extends StatelessWidget {
 
     Widget buildCameraPreview() {
       if (status == Status.isInitializingCamera) {
-        return buildProgressIndicator(text: 'Kamera wird initialisiert');
+        return buildProgressIndicator(text: 'loadingCamera'.tr());
       }
 
       if (status == Status.isUploading) {
-        return buildProgressIndicator(text: 'Bild wird hochgeladen');
+        return buildProgressIndicator(text: 'isUploadingImage'.tr());
       }
 
       return CameraPreview(vm.controller);
@@ -51,7 +52,7 @@ class CarUploadDummyScreen extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => CloseableAlert(
-            title: 'Fehler',
+            title: 'error'.tr(),
             content: error,
           ),
         );
@@ -64,7 +65,7 @@ class CarUploadDummyScreen extends StatelessWidget {
         child: const Icon(Icons.camera_alt),
       ),
       appBar: AppBar(
-        title: const Text('Bildupload-Test'),
+        title: Text('uploadImage'.tr()),
       ),
       body: buildCameraPreview(),
     );

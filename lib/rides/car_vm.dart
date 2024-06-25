@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -37,7 +38,7 @@ class CarVM extends ChangeNotifier {
 
     if (cameras.isEmpty) {
       setStatusAndNotify(Status.error);
-      throw 'This device has no cameras';
+      throw 'yourDeviceHasNoCamera'.tr();
     }
 
     // use back camera if there are two cameras
@@ -63,7 +64,7 @@ class CarVM extends ChangeNotifier {
 
     if (apiUrl == null) {
       setStatusAndNotify(Status.error);
-      throw 'Api URL is null, do you added it to .env?';
+      throw 'missingEnvVar'.tr(args: ['API_URL']);
     }
 
     final carImageUrl = Uri.parse('$apiUrl/cars/image');
@@ -96,17 +97,19 @@ class CarVM extends ChangeNotifier {
       response = await request.send();
     } on SocketException catch (exception) {
       log(exception.message);
-      throw 'Backend ist nicht aktiv';
+      throw 'cantConnectToBackend'.tr();
     } catch (exception) {
       log(exception.toString());
-      throw 'Unbekannter Fehler';
+      throw 'unknownErrorOccurred'.tr();
     } finally {
       setStatusAndNotify(Status.error);
     }
 
     if (response.statusCode != 201) {
       setStatusAndNotify(Status.error);
-      throw 'Server hat mit Status-Code ${response.statusCode} geantwortet';
+      throw 'backendRespondedWithStatus'.tr(
+        args: [response.statusCode.toString()],
+      );
     }
 
     setStatusAndNotify(Status.success);

@@ -3,18 +3,25 @@
   "profile_navbar": "Profile",
   "drivers_log_navbar": "Driver's log",
   "settings_navbar": "Settings",
-
   "login": {},
   "username_email_login": "Username/E-Mail",
   "password_login": "Password",
   "switch_register": "Switch to register",
   "login_button": "Login",
-
   "profile": {},
   "personal_data": "Personal Data",
   "name": "Name",
   "surname": "Surname",
   "e-mail": "E-Mail",
   "your cars": "Your Cars",
-  "add new car": "Add new Car"
+  "add new car": "Add new Car",
+  "loadingCamera": "Loading camera",
+  "isUploadingImage": "Uploading image",
+  "error": "Error",
+  "uploadImage": "Upload image",
+  "yourDeviceHasNoCamera": "Your device has no camera",
+  "missingEnvVar": "The environment variable {} is not set",
+  "cantConnectToBackend": "Can't connect to the backend",
+  "unknownErrorOccurred": "An unknown error occurred",
+  "backendRespondedWithStatus": "The backend responded with status {}"
 }
