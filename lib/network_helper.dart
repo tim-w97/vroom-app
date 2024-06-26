@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vroom_campus_app/userdefaults/keys.dart';
 
 import 'model/user.dart';
@@ -37,16 +37,20 @@ class NetworkHelper {
   }
 
   Future<User> getUser() async {
-    final String basicAuth =
-        prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
+    final String? basicAuth = prefs.getString(
+      SharedPreferencesKeys.base64Authentication.toString(),
+    );
+
     final response = await http.get(
       Uri.parse('$API_URL/user'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'authorization': basicAuth,
+        'authorization': basicAuth ?? "",
       },
     );
-    if (response.statusCode == 200) { //TODO User feedback
+
+    if (response.statusCode == 200) {
+      //TODO User feedback
       return User.fromJson(jsonDecode(response.body));
     } else {
       return User(firstName: "", lastName: "", email: "", password: "");
@@ -55,7 +59,7 @@ class NetworkHelper {
 
   Future<void> updateUser() async {
     final String basicAuth =
-      prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
+        prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
     //TODO
   }
 }
