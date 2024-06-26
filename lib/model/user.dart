@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'car.dart';
 import 'gender.dart';
 import 'package:json_annotation/json_annotation.dart';
