@@ -12,6 +12,7 @@ class NetworkHelper {
   bool isLoading = true;
   late final SharedPreferences prefs;
 
+  //!!! Call this first before using the networkhelper !!!
   Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
     isLoading = false;
@@ -37,6 +38,7 @@ class NetworkHelper {
   }
 
   Future<User> getUser() async {
+    isLoading = true;
     final String? basicAuth = prefs.getString(
       SharedPreferencesKeys.base64Authentication.toString(),
     );
@@ -51,15 +53,27 @@ class NetworkHelper {
 
     if (response.statusCode == 200) {
       //TODO User feedback
+      isLoading = false;
       return User.fromJson(jsonDecode(response.body));
     } else {
-      return User(firstName: "", lastName: "", email: "", password: "");
+      isLoading = false;
+      return User(id:"",firstName: "", lastName: "", email: "", password: "");
     }
   }
 
-  Future<void> updateUser() async {
+  Future<void> updateUser(User user) async {
+    //route /user/id:
+    isLoading = true;
     final String basicAuth =
-        prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
-    //TODO
+      prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
+    final response = await http.patch(
+      Uri.parse('$API_URL/user/${user.id}'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'authorization': basicAuth,
+      },
+      body: user.toJson()
+    );
+    isLoading = false;
   }
 }

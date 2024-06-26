@@ -12,7 +12,7 @@ class ProfileVM with ChangeNotifier {
   int _currentIndex = 0;
   bool _isEditing = false;
   bool _isEditingCars = false;
-  User _user = User(firstName: "", lastName: "", email: "", password: "");
+  User _user = User(id:"",firstName: "", lastName: "", email: "", password: "");
   NetworkHelper networkHelper = NetworkHelper();
   late List<MultiButtonAction> genderSelect;
 
@@ -29,7 +29,7 @@ class ProfileVM with ChangeNotifier {
       }),];
     _initialize();
   }
-  int get currentIndex => _currentIndex;
+  //int get currentIndex => _currentIndex;
   bool get isEditing => _isEditing;
   bool get isEditingCars => _isEditingCars;
   String get name => _user.firstName;
@@ -49,13 +49,32 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
-  void editButtonHandler() {
+  int currentIndex() {
+    switch (_user.gender) {
+      case Gender.female:
+        return 0;
+      case Gender.male:
+        return 1;
+      case Gender.diverse:
+        return 2;
+      default:
+        return 0;
+    }
+  }
+
+  void editButtonHandler() async {
     _isEditing = !_isEditing;
+    if(!_isEditing) {
+      await updateUser();
+    }
     notifyListeners();
   }
 
-  void editCarsButtonHandler() {
+  void editCarsButtonHandler() async {
     _isEditingCars = !_isEditingCars;
+    if(!_isEditingCars) {
+      await updateUser();
+    }
     notifyListeners();
   }
 
@@ -84,6 +103,13 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateUser() async {
+    if (!networkHelper.isLoading) {
+      await networkHelper.updateUser(_user);
+    }
+    notifyListeners();
+  }
+
   Future<void> fetchUser() async {
     if (!networkHelper.isLoading) {
       _setUser(await networkHelper.getUser());
@@ -91,9 +117,6 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUser() async {
-
-  }
 
   MultiButtonAction get currentGender => genderSelect[_currentIndex];
 
