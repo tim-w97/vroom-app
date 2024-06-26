@@ -8,6 +8,8 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User {
+  @JsonKey(name:'_id')
+  String id = "";
 
   String firstName = "";
   String lastName = "";
@@ -25,6 +27,7 @@ class User {
   List<Car>? cars;
 
   User ({
+    required this.id,
     required this.firstName,
     required this.lastName,
     required this.email,

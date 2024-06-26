@@ -9,7 +9,7 @@ import '../model/car.dart';
 class RideVM extends ChangeNotifier {
   OpenRouteService openRouteService =
       OpenRouteService(apiKey: dotenv.env['API_KEY'] ?? "");
-  User currentUser = User(firstName: "", lastName: "", email: "", password: "");
+  User currentUser = User(id:"",firstName: "", lastName: "", email: "", password: "");
   NetworkHelper networkHelper = NetworkHelper();
   List<Car> cars = [];
 

@@ -12,6 +12,7 @@ class NetworkHelper {
   bool isLoading = true;
   late final SharedPreferences prefs;
 
+  //!!! Call this first before using the networkhelper !!!
   Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
     isLoading = false;
@@ -49,11 +50,12 @@ class NetworkHelper {
     if (response.statusCode == 200) { //TODO User feedback
       return User.fromJson(jsonDecode(response.body));
     } else {
-      return User(firstName: "", lastName: "", email: "", password: "");
+      return User(id:"",firstName: "", lastName: "", email: "", password: "");
     }
   }
 
   Future<void> updateUser() async {
+    //route /user/id:
     final String basicAuth =
       prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
     //TODO

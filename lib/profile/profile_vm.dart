@@ -12,7 +12,7 @@ class ProfileVM with ChangeNotifier {
   int _currentIndex = 0;
   bool _isEditing = false;
   bool _isEditingCars = false;
-  User _user = User(firstName: "", lastName: "", email: "", password: "");
+  User _user = User(id:"",firstName: "", lastName: "", email: "", password: "");
   NetworkHelper networkHelper = NetworkHelper();
   late List<MultiButtonAction> genderSelect;
 
