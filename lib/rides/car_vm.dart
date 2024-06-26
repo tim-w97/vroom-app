@@ -47,11 +47,18 @@ class CarVM extends ChangeNotifier {
       throw 'yourDeviceHasNoCamera'.tr();
     }
 
-    // use back camera if there are two cameras
-    final camera = cameras.length > 1 ? cameras[1] : cameras[0];
+    var usedCamera = cameras.first;
+
+    if (cameras.length > 1) {
+      for (var camera in cameras) {
+        if (camera.lensDirection == CameraLensDirection.back) {
+          usedCamera = camera;
+        }
+      }
+    }
 
     controller = CameraController(
-      camera,
+      usedCamera,
       ResolutionPreset.medium,
     );
 
