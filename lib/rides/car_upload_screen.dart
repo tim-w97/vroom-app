@@ -29,18 +29,6 @@ class CarUploadScreen extends StatelessWidget {
     final vm = context.read<CarVM>();
     final status = context.select<CarVM, Status>((vm) => vm.status);
 
-    Widget buildCameraPreview() {
-      if (status == Status.isInitializingCamera) {
-        return buildProgressIndicator(text: 'loadingCamera'.tr());
-      }
-
-      if (status == Status.isUploading) {
-        return buildProgressIndicator(text: 'isUploadingImage'.tr());
-      }
-
-      return CameraPreview(vm.controller);
-    }
-
     Future<void> uploadImage() async {
       try {
         await vm.uploadImage();
@@ -73,11 +61,43 @@ class CarUploadScreen extends StatelessWidget {
       }
     }
 
+    Widget buildCameraPreview() {
+      if (status == Status.isInitializingCamera) {
+        return buildProgressIndicator(text: 'loadingCamera'.tr());
+      }
+
+      if (status == Status.isUploading) {
+        return buildProgressIndicator(text: 'isUploadingImage'.tr());
+      }
+
+      return Column(
+        children: [
+          CameraPreview(vm.controller),
+          Flexible(
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton.filled(
+                    padding: const EdgeInsets.all(30),
+                    onPressed: vm.switchCamera,
+                    icon: const Icon(Icons.cameraswitch),
+                  ),
+                  const SizedBox(width: 20),
+                  IconButton.filledTonal(
+                    padding: const EdgeInsets.all(30),
+                    onPressed: uploadImage,
+                    icon: const Icon(Icons.camera_alt),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      );
+    }
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton.large(
-        onPressed: uploadImage,
-        child: const Icon(Icons.camera_alt),
-      ),
       appBar: AppBar(
         title: Text('uploadImage'.tr()),
       ),

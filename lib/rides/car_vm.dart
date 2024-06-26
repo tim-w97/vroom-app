@@ -26,6 +26,12 @@ class CarVM extends ChangeNotifier {
     _initCamera();
   }
 
+  Future<void> switchCamera() async {
+    setStatusAndNotify(Status.isInitializingCamera);
+    await Future.delayed(Duration(seconds: 1));
+    setStatusAndNotify(Status.idle);
+  }
+
   void setStatusAndNotify(Status status) {
     this.status = status;
     notifyListeners();
@@ -67,7 +73,8 @@ class CarVM extends ChangeNotifier {
       throw 'missingEnvVar'.tr(args: ['API_URL']);
     }
 
-    final carImageUrl = Uri.parse('$apiUrl/cars/image');
+    final carImageUrl =
+        Uri.parse('$apiUrl/cars/667bf780ce4c5733d7e5d8f1/image');
 
     // TODO: use Base64 encoded credentials from shared preferences
     const username = 'tim@test.de';
