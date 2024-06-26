@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vroom_campus_app/rides/car_upload_screen.dart';
+import 'package:vroom_campus_app/rides/car_vm.dart';
 import 'package:vroom_campus_app/rides/map_view.dart';
 import 'package:vroom_campus_app/rides/ride_vm.dart';
 
@@ -21,27 +23,34 @@ class CarView extends StatelessWidget {
                 const Padding(padding: EdgeInsets.all(10)),
                 ElevatedButton(
                     onPressed: () {
-                      print("+");
+                      final route = MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider<CarVM>(
+                            create: (context) => CarVM(),
+                            builder: (context, child) {
+                              return const CarUploadScreen();
+                            }),
+                      );
+
+                      Navigator.of(context).push(route);
                     },
                     child: const Text("+ Neues Fahrzeug")),
-                Consumer<RideVM>(builder: (context,vm,child) {
-                return Column(children: (vm.currentUser.cars ?? [])
-                    .map<Widget>(
-                      (car) => Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                          "${car.model} / ${car.licensePlate}"),
-                        GestureDetector(
-                          onTap: () => vm.removeCar(car),
-                          child: const Icon(
-                              Icons.delete_outline),
-                        ),
-                    ],
-                  ),
-                )
-                    .toList(),);
+                Consumer<RideVM>(builder: (context, vm, child) {
+                  return Column(
+                    children: (vm.currentUser.cars ?? [])
+                        .map<Widget>(
+                          (car) => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("${car.model} / ${car.licensePlate}"),
+                              GestureDetector(
+                                onTap: () => vm.removeCar(car),
+                                child: const Icon(Icons.delete_outline),
+                              ),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  );
                 }),
                 const Padding(padding: EdgeInsets.all(10)),
               ],

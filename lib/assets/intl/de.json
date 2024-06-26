@@ -3,19 +3,27 @@
   "profile_navbar": "Profil",
   "drivers_log_navbar": "Fahrplan",
   "settings_navbar": "Einstellungen",
-
   "login": {},
   "username_email_login": "Nutzername/E-Mail",
   "password_login": "Passwort",
   "switch_register": "Zu Registrierung wechseln",
   "login_button": "Einloggen",
-
   "profile": {},
   "personal_data": "Persönliche Daten",
   "name": "Vorname",
   "surname": "Nachname",
   "e-mail": "E-Mail",
   "your cars": "Deine Fahrzeuge",
-  "add new car": "Neues Fahrzeug hinzufügen"
-
+  "add new car": "Neues Fahrzeug hinzufügen",
+  "loadingCamera": "Kamera wird geladen",
+  "isUploadingImage": "Bild wird hochgeladen",
+  "error": "Fehler",
+  "uploadImage": "Bild hochladen",
+  "yourDeviceHasNoCamera": "Dein Smartphone hat keine Kamera",
+  "missingEnvVar": "Die Umgebungsvariable {} ist nicht gesetzt",
+  "cantConnectToBackend": "Die Verbindung zum Backend kann nicht hergestellt werden",
+  "unknownErrorOccurred": "Ein unbekannter Fehler ist aufgetreten",
+  "backendRespondedWithStatus": "Das Backend hat mit dem Status {} geantwortet",
+  "operationSuccessful": "Operation erfolgreich",
+  "imageUploadedSuccessfully": "Das Bild wurde hochgeladen"
 }
