@@ -28,7 +28,6 @@ class NetworkHelper {
         'authorization': basicAuth,
       },
     );
-
     if (response.statusCode == 200) {
       prefs.setString(
           SharedPreferencesKeys.base64Authentication.toString(), basicAuth);
@@ -52,5 +51,11 @@ class NetworkHelper {
     } else {
       return User(firstName: "", lastName: "", email: "", password: "");
     }
+  }
+
+  Future<void> updateUser() async {
+    final String basicAuth =
+      prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
+    //TODO
   }
 }

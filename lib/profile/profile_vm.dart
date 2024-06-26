@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:vroom_campus_app/model/user.dart';
 import 'package:vroom_campus_app/network_helper.dart';
@@ -39,6 +41,7 @@ class ProfileVM with ChangeNotifier {
   Future<void> _initialize() async {
     await networkHelper.init();
     fetchUser();
+    _setGender(_user.gender ?? Gender.diverse); //TODO fix gender selection
   }
 
   void setIndex(int index) {
@@ -86,6 +89,10 @@ class ProfileVM with ChangeNotifier {
       _setUser(await networkHelper.getUser());
     }
     notifyListeners();
+  }
+
+  Future<void> updateUser() async {
+
   }
 
   MultiButtonAction get currentGender => genderSelect[_currentIndex];
