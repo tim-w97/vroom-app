@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -10,18 +9,17 @@ import 'model/user.dart';
 
 class NetworkHelper {
   final String API_URL = dotenv.env['API_URL'] ?? "";
+  bool isLoading = true;
   late final SharedPreferences prefs;
 
-  NetworkHelper() {
-
-  }
-
-  _init() async { //TODO Loading or nullable
+  Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
+    isLoading = false;
   }
 
   Future<void> login(String username, String password) async {
-    final String basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
 
     final response = await http.post(
       Uri.parse('$API_URL/login'),
@@ -32,17 +30,16 @@ class NetworkHelper {
     );
 
     if (response.statusCode == 200) {
-      prefs.setString(SharedPreferencesKeys.base64Authentication.toString(), basicAuth);
-      final responseJson = jsonDecode(response.body);
+      prefs.setString(
+          SharedPreferencesKeys.base64Authentication.toString(), basicAuth);
     } else {
       print(response.statusCode);
     }
   }
 
   Future<User> getUser() async {
-    prefs = await SharedPreferences.getInstance();
-    print("called");
-    final String basicAuth = '${prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!}';
+    final String basicAuth =
+        prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
     final response = await http.get(
       Uri.parse('$API_URL/user'),
       headers: <String, String>{
@@ -54,11 +51,9 @@ class NetworkHelper {
       print(response.body);
       return User.fromJson(jsonDecode(response.body));
       //final User user = jsonMap;
-
     } else {
       print(response.statusCode);
       return User(firstName: "", lastName: "", email: "", password: "");
     }
   }
-
 }

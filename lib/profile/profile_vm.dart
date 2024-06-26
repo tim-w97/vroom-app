@@ -7,7 +7,6 @@ import '../model/gender.dart';
 import '../model/multi_button_action.dart';
 
 class ProfileVM with ChangeNotifier {
-  //final UserDataModel _userDataModel = UserDataModel.sharedInstance;
   int _currentIndex = 0;
   bool _isEditing = false;
   bool _isEditingCars = false;
@@ -16,8 +15,6 @@ class ProfileVM with ChangeNotifier {
   late List<MultiButtonAction> genderSelect;
 
   ProfileVM() {
-    //_user = _userDataModel.userContainer;
-    fetchUser();
     genderSelect = [
       MultiButtonAction(name: "W", action: () {
         _setGender(Gender.female);
@@ -28,6 +25,7 @@ class ProfileVM with ChangeNotifier {
       MultiButtonAction(name: "D", action: () {
         _setGender(Gender.diverse);
       }),];
+    _initialize();
   }
   int get currentIndex => _currentIndex;
   bool get isEditing => _isEditing;
@@ -36,6 +34,12 @@ class ProfileVM with ChangeNotifier {
   String get surName => _user.lastName;
   String get email => _user.email;
   Gender get gender => _user.gender ?? Gender.diverse;
+
+
+  Future<void> _initialize() async {
+    await networkHelper.init();
+    fetchUser();
+  }
 
   void setIndex(int index) {
     _currentIndex = index;
@@ -77,8 +81,10 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchUser() async {
-    _setUser(await networkHelper.getUser());
+  Future<void> fetchUser() async {
+    if (!networkHelper.isLoading) {
+      _setUser(await networkHelper.getUser());
+    }
     notifyListeners();
   }
 
