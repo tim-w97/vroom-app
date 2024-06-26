@@ -25,7 +25,7 @@ class CarView extends StatelessWidget {
                     },
                     child: const Text("+ Neues Fahrzeug")),
                 Consumer<RideVM>(builder: (context,vm,child) {
-                return Column(children: vm.cars
+                return Column(children: (vm.currentUser.cars ?? [])
                     .map<Widget>(
                       (car) => Row(
                     mainAxisAlignment:

@@ -90,7 +90,6 @@ class ProfileVM with ChangeNotifier {
 
   MultiButtonAction get currentGender => genderSelect[_currentIndex];
 
-
   get cars => _user.cars ?? [];
 
   void removeCar(Car car) {

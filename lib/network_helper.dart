@@ -47,12 +47,9 @@ class NetworkHelper {
         'authorization': basicAuth,
       },
     );
-    if (response.statusCode == 200) {
-      print(response.body);
+    if (response.statusCode == 200) { //TODO User feedback
       return User.fromJson(jsonDecode(response.body));
-      //final User user = jsonMap;
     } else {
-      print(response.statusCode);
       return User(firstName: "", lastName: "", email: "", password: "");
     }
   }
