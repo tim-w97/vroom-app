@@ -85,7 +85,7 @@ class CarVM extends ChangeNotifier {
     request.headers.addAll(headers);
 
     final multipartFile = await http.MultipartFile.fromPath(
-      'imageFile',
+      'carImage',
       imageFile.path,
     );
 
@@ -101,8 +101,6 @@ class CarVM extends ChangeNotifier {
     } catch (exception) {
       log(exception.toString());
       throw 'unknownErrorOccurred'.tr();
-    } finally {
-      setStatusAndNotify(Status.error);
     }
 
     if (response.statusCode != 201) {
