@@ -49,13 +49,19 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
-  void editButtonHandler() {
+  void editButtonHandler() async {
     _isEditing = !_isEditing;
+    if(!_isEditing) {
+      await updateUser();
+    }
     notifyListeners();
   }
 
-  void editCarsButtonHandler() {
+  void editCarsButtonHandler() async {
     _isEditingCars = !_isEditingCars;
+    if(!_isEditingCars) {
+      await updateUser();
+    }
     notifyListeners();
   }
 
@@ -84,6 +90,13 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateUser() async {
+    if (!networkHelper.isLoading) {
+      await networkHelper.updateUser(_user);
+    }
+    notifyListeners();
+  }
+
   Future<void> fetchUser() async {
     if (!networkHelper.isLoading) {
       _setUser(await networkHelper.getUser());
@@ -91,9 +104,6 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUser() async {
-
-  }
 
   MultiButtonAction get currentGender => genderSelect[_currentIndex];
 

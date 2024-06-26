@@ -38,6 +38,7 @@ class NetworkHelper {
   }
 
   Future<User> getUser() async {
+    isLoading = true;
     final String basicAuth =
         prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
     final response = await http.get(
@@ -48,16 +49,27 @@ class NetworkHelper {
       },
     );
     if (response.statusCode == 200) { //TODO User feedback
+      isLoading = false;
       return User.fromJson(jsonDecode(response.body));
     } else {
+      isLoading = false;
       return User(id:"",firstName: "", lastName: "", email: "", password: "");
     }
   }
 
-  Future<void> updateUser() async {
+  Future<void> updateUser(User user) async {
     //route /user/id:
+    isLoading = true;
     final String basicAuth =
       prefs.getString(SharedPreferencesKeys.base64Authentication.toString())!;
-    //TODO
+    final response = await http.patch(
+      Uri.parse('$API_URL/user/${user.id}'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'authorization': basicAuth,
+      },
+      body: user.toJson()
+    );
+    isLoading = false;
   }
 }
