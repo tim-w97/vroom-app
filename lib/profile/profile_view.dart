@@ -104,7 +104,7 @@ class _ProfileView extends State<ProfileView> {
                               MultiButton(
                                 enabled: vm.isEditing,
                                 actions: vm.genderSelect,
-                                activeButtonIndex: vm.currentIndex,
+                                activeButtonIndex: vm.currentIndex(),
                                 onTap: vm.setIndex,
                                 activeColor: Colors.blue,
                                 activeTextStyle:

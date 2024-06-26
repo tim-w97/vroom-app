@@ -29,7 +29,7 @@ class ProfileVM with ChangeNotifier {
       }),];
     _initialize();
   }
-  int get currentIndex => _currentIndex;
+  //int get currentIndex => _currentIndex;
   bool get isEditing => _isEditing;
   bool get isEditingCars => _isEditingCars;
   String get name => _user.firstName;
@@ -47,6 +47,19 @@ class ProfileVM with ChangeNotifier {
   void setIndex(int index) {
     _currentIndex = index;
     notifyListeners();
+  }
+
+  int currentIndex() {
+    switch (_user.gender) {
+      case Gender.female:
+        return 0;
+      case Gender.male:
+        return 1;
+      case Gender.diverse:
+        return 2;
+      default:
+        return 0;
+    }
   }
 
   void editButtonHandler() async {
