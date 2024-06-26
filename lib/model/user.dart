@@ -2,11 +2,15 @@ import 'dart:ui';
 
 import 'car.dart';
 import 'gender.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user.g.dart';
+
+@JsonSerializable()
 class User {
 
   String firstName = "";
-  String surName = "";
+  String lastName = "";
   String email = "";
   String password = "";
 
@@ -15,14 +19,14 @@ class User {
   Gender? gender;
   String? description;
   int? evaluation;
-  Image? image; //TODO Default picture when null
+  String? image; //TODO Default picture when null
   List<String>? favoriteDrivers;
   List<String>? rememberedRides;
   List<Car>? cars;
 
   User ({
     required this.firstName,
-    required this.surName,
+    required this.lastName,
     required this.email,
     required this.password,
     this.phoneNumber,
@@ -35,4 +39,9 @@ class User {
     this.cars,
   });
 
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
+
 }
+

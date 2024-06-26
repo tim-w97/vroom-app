@@ -34,23 +34,24 @@ class CarView extends StatelessWidget {
                       Navigator.of(context).push(route);
                     },
                     child: const Text("+ Neues Fahrzeug")),
-                Consumer<RideVM>(builder: (context, vm, child) {
-                  return Column(
-                    children: vm.cars
-                        .map<Widget>(
-                          (car) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("${car.model} / ${car.licensePlate}"),
-                              GestureDetector(
-                                onTap: () => vm.removeCar(car),
-                                child: const Icon(Icons.delete_outline),
-                              ),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  );
+                Consumer<RideVM>(builder: (context,vm,child) {
+                return Column(children: (vm.currentUser.cars ?? [])
+                    .map<Widget>(
+                      (car) => Row(
+                    mainAxisAlignment:
+                    MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                          "${car.model} / ${car.licensePlate}"),
+                        GestureDetector(
+                          onTap: () => vm.removeCar(car),
+                          child: const Icon(
+                              Icons.delete_outline),
+                        ),
+                    ],
+                  ),
+                )
+                    .toList(),);
                 }),
                 const Padding(padding: EdgeInsets.all(10)),
               ],

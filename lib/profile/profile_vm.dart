@@ -1,20 +1,22 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:vroom_campus_app/model/user.dart';
+import 'package:vroom_campus_app/network_helper.dart';
 
 import '../model/car.dart';
 import '../model/gender.dart';
 import '../model/multi_button_action.dart';
 
 class ProfileVM with ChangeNotifier {
-  //final UserDataModel _userDataModel = UserDataModel.sharedInstance;
   int _currentIndex = 0;
   bool _isEditing = false;
   bool _isEditingCars = false;
-  final User _user = User(firstName: "firstName", surName: "", email: "", password: "");
+  User _user = User(firstName: "", lastName: "", email: "", password: "");
+  NetworkHelper networkHelper = NetworkHelper();
   late List<MultiButtonAction> genderSelect;
 
   ProfileVM() {
-    //_user = _userDataModel.userContainer;
     genderSelect = [
       MultiButtonAction(name: "W", action: () {
         _setGender(Gender.female);
@@ -25,14 +27,22 @@ class ProfileVM with ChangeNotifier {
       MultiButtonAction(name: "D", action: () {
         _setGender(Gender.diverse);
       }),];
+    _initialize();
   }
   int get currentIndex => _currentIndex;
   bool get isEditing => _isEditing;
   bool get isEditingCars => _isEditingCars;
   String get name => _user.firstName;
-  String get surName => _user.surName;
+  String get surName => _user.lastName;
   String get email => _user.email;
   Gender get gender => _user.gender ?? Gender.diverse;
+
+
+  Future<void> _initialize() async {
+    await networkHelper.init();
+    fetchUser();
+    _setGender(_user.gender ?? Gender.diverse); //TODO fix gender selection
+  }
 
   void setIndex(int index) {
     _currentIndex = index;
@@ -55,7 +65,7 @@ class ProfileVM with ChangeNotifier {
   }
 
   void setSurName(String surName) {
-    _user.surName = surName;
+    _user.lastName = surName;
     notifyListeners();
   }
 
@@ -69,8 +79,23 @@ class ProfileVM with ChangeNotifier {
     notifyListeners();
   }
 
-  MultiButtonAction get currentGender => genderSelect[_currentIndex];
+  void _setUser(User user) {
+    _user = user;
+    notifyListeners();
+  }
 
+  Future<void> fetchUser() async {
+    if (!networkHelper.isLoading) {
+      _setUser(await networkHelper.getUser());
+    }
+    notifyListeners();
+  }
+
+  Future<void> updateUser() async {
+
+  }
+
+  MultiButtonAction get currentGender => genderSelect[_currentIndex];
 
   get cars => _user.cars ?? [];
 
