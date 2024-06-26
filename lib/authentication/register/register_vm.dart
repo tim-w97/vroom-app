@@ -3,34 +3,38 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:vroom_campus_app/model/user.dart';
+
 class RegisterVM extends ChangeNotifier {
-  String _username = "";
-  String _password = "";
-  String _email = "";
+  User _newUser = User(id: '', firstName: '', lastName: '', email: '', password: '');
   bool _passwordIsValid = false;
   String API_URL = dotenv.env['API_URL'] ?? "";
 
-  String get username => _username;
-  void setUsername(String username) {
-    _username = username;
-    notifyListeners();
+  String get firstName => _newUser.firstName;
+  void setFirstName(String firstName) {
+    _newUser.firstName = firstName;
   }
 
-  String get password => _password;
+  String get LastName => _newUser.firstName;
+  void setLastName(String lastName) {
+    _newUser.lastName = lastName;
+  }
+
+  String get password => _newUser.password;
   void setPassword(String password) {
-    _password = password;
+    _newUser.password = password;
     notifyListeners();
   }
 
-  String get email => _email;
+  String get email => _newUser.email;
   void setEmail(String email) {
-    _email = email;
+    _newUser.email = email;
     notifyListeners();
   }
 
   bool get passwordIsValid => _passwordIsValid;
   void validatePassword(String validatePassword) {
-    _passwordIsValid = _password == validatePassword;
+    _passwordIsValid = _newUser.password == validatePassword;
     notifyListeners();
   }
 
@@ -41,8 +45,10 @@ class RegisterVM extends ChangeNotifier {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'email': _email,
-        'password': _password,
+        'firstName': _newUser.firstName,
+        'lastName': _newUser.lastName,
+        'email': _newUser.email,
+        'password': _newUser.password,
       }),
     );
 

@@ -11,7 +11,7 @@ class RegisterView extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => RegisterVM(),
       child: Scaffold(
-        appBar: AppBar(title: Text('Register')),
+        appBar: AppBar(title:const Text('Register')),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -22,7 +22,7 @@ class RegisterView extends StatelessWidget {
                     onPressed: () {
                       vm.toggleScreen();
                     },
-                    child: Text("Switch to Login"),
+                    child:const Text("Switch to Login"),
                   );
                 }),
                 Consumer<RegisterVM>(builder: (context, vm, child) {
@@ -34,11 +34,23 @@ class RegisterView extends StatelessWidget {
                         width: 300,
                         child: TextField(
                           onChanged: (value) {
-                            vm.setUsername(value);
+                            vm.setFirstName(value);
                           },
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: "Username"),
+                          decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "First name"),
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.all(10)),
+                      SizedBox(
+                        width: 300,
+                        child: TextField(
+                          onChanged: (value) {
+                            vm.setLastName(value);
+                          },
+                          decoration:const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Last name"),
                         ),
                       ),
                       const Padding(padding: EdgeInsets.all(10)),
@@ -48,8 +60,8 @@ class RegisterView extends StatelessWidget {
                           onChanged: (value) {
                             vm.setEmail(value);
                           },
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
+                          decoration:const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: "Email"),
                         ),
                       ),
@@ -61,8 +73,8 @@ class RegisterView extends StatelessWidget {
                             vm.setPassword(value);
                           },
                           obscureText: true,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
+                          decoration:const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: "Password"),
                         ),
                       ),
@@ -74,8 +86,8 @@ class RegisterView extends StatelessWidget {
                             vm.validatePassword(value);
                           },
                           obscureText: true,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
+                          decoration:const InputDecoration(
+                              border: OutlineInputBorder(),
                               labelText: "Repeat Password"),
                         ),
                       ),
@@ -85,8 +97,8 @@ class RegisterView extends StatelessWidget {
                           if (vm.passwordIsValid) {
                             try {
                               await vm.register(); // POST-Request
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Registration successful')),
+                              ScaffoldMessenger.of(context).showSnackBar( //TODO
+                               const SnackBar(content: Text('Registration successful')),
                               );
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -95,11 +107,11 @@ class RegisterView extends StatelessWidget {
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Passwords do not match')),
+                             const SnackBar(content: Text('Passwords do not match')),
                             );
                           }
                         },
-                        child: Text("Register"),
+                        child:const Text("Register"),
                       ),
                     ],
                   );
